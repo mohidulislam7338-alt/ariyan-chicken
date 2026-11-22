@@ -30,62 +30,34 @@
     };
   </script>
 
-  <!-- Google Font: Inter (gracefully falls back to system fonts when offline) -->
+  <!-- Google Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
-    /* Smooth scrolling and mobile tap highlights */
-    html {
-      scroll-behavior: smooth;
-      -webkit-tap-highlight-color: transparent;
-    }
-    body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #f8fafc;
-      color: #0f172a;
-    }
-    /* Hide scrollbar for horizontal tab bars */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    /* Subtle pulse for voice recording */
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc; color: #0f172a; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     @keyframes pulseRing {
       0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
       70% { box-shadow: 0 0 0 12px rgba(220, 38, 38, 0); }
       100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
     }
-    .recording-pulse {
-      animation: pulseRing 1.4s infinite;
-    }
-    /* Modal fade */
-    .fade-in {
-      animation: fadeIn 0.18s ease-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .recording-pulse { animation: pulseRing 1.4s infinite; }
+    .fade-in { animation: fadeIn 0.18s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased selection:bg-emerald-100 selection:text-emerald-900">
 
-  <!-- ===================================================================== -->
-  <!-- TOP HEADER & PUBLIC LIVE RATE BANNER (VISIBLE TO EVERYONE)            -->
-  <!-- ===================================================================== -->
+  <!-- TOP HEADER & PUBLIC LIVE RATE BANNER -->
   <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
-    <!-- Top Brand & Connection Status Bar -->
     <div class="bg-slate-900 text-white">
       <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2">
-        <!-- Brand Identity -->
         <div class="flex items-center gap-2.5">
           <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shadow-inner shrink-0">
-            <!-- Inline SVG Brand Emblem -->
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
@@ -96,15 +68,11 @@
           </div>
         </div>
 
-        <!-- Right Controls: Online/Offline Badge + Active Session Pill -->
         <div class="flex items-center gap-2 flex-wrap">
-          <!-- Live Connection Status Badge -->
           <div id="networkStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-900/80 text-emerald-200 border border-emerald-700/70">
             <span id="networkStatusDot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
             <span id="networkStatusText">Online</span>
           </div>
-
-          <!-- Logged-In User Badge & Logout -->
           <div id="headerUserControls" class="hidden items-center gap-2">
             <span id="headerUserLabel" class="hidden sm:inline-block text-xs font-medium text-slate-200 bg-slate-800 px-2.5 py-1 rounded-full border border-slate-700"></span>
             <button onclick="requestLogout()" class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-semibold transition cursor-pointer">
@@ -115,7 +83,6 @@
       </div>
     </div>
 
-    <!-- Live Broiler Rate Banner -->
     <div class="bg-emerald-800 text-white">
       <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
         <div class="flex items-center gap-2">
@@ -133,7 +100,6 @@
       </div>
     </div>
 
-    <!-- Contact Bar -->
     <div class="bg-white border-t border-slate-100">
       <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-2">
         <div class="flex items-center gap-2 text-sm text-slate-700 font-semibold">
@@ -144,15 +110,9 @@
         </div>
         <div class="flex items-center gap-2">
           <a href="tel:+916000911910" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold transition shadow-sm">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
             Call Now
           </a>
           <a href="https://wa.me/916000911910" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold transition shadow-sm">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.453 1.344-2.016 1.422-.516.078-1.188.109-1.922-.125-.453-.141-1.031-.328-1.766-.641-3.109-1.344-5.125-4.484-5.281-4.688-.156-.203-1.266-1.688-1.266-3.219 0-1.531.797-2.281 1.078-2.594.281-.312.625-.391.828-.391.203 0 .406.016.594.016.188 0 .453-.078.703.531.266.625.891 2.172.969 2.328.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.312.828 1.359 1.781 2.203 1.219 1.094 2.25 1.438 2.562 1.594.312.156.5.125.688-.078.188-.203.781-.922.984-1.234.203-.312.406-.266.688-.156.281.109 1.797.844 2.109 1 .312.156.516.234.594.359.078.125.078.734-.172 1.438z"/>
-            </svg>
             WhatsApp
           </a>
         </div>
@@ -160,16 +120,9 @@
     </div>
   </header>
 
-  <!-- ===================================================================== -->
-  <!-- MAIN APPLICATION CONTAINER                                            -->
-  <!-- ===================================================================== -->
   <main class="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-6 py-5 pb-24">
-
-    <!-- =================================================================== -->
-    <!-- VIEW 1: PUBLIC LANDING & LOGIN / ONE-TIME SIGN UP                   -->
-    <!-- =================================================================== -->
+    <!-- VIEW 1: PUBLIC LANDING & LOGIN -->
     <section id="viewLanding" class="space-y-6 fade-in">
-      <!-- Intro Banner -->
       <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <span class="inline-block px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200 mb-2">
@@ -190,9 +143,7 @@
         </div>
       </div>
 
-      <!-- Auth Tabs Card -->
       <div class="max-w-xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <!-- Role Selector Tabs -->
         <div class="grid grid-cols-2 border-b border-slate-200 bg-slate-50">
           <button id="authTabCustomer" onclick="switchAuthTab('customer')" class="py-3.5 text-sm font-bold text-center border-b-2 border-emerald-700 text-emerald-800 bg-white transition cursor-pointer">
             Customer Login / Sign Up
@@ -202,9 +153,7 @@
           </button>
         </div>
 
-        <!-- CUSTOMER AUTH PANEL -->
         <div id="customerAuthPanel" class="p-5 sm:p-6 space-y-5">
-          <!-- Sub-switch: Login vs One-Time Sign Up -->
           <div class="flex p-1 bg-slate-100 rounded-xl">
             <button id="custSubLoginBtn" onclick="switchCustomerAuthMode('login')" class="flex-1 py-2 text-sm font-bold rounded-lg bg-white text-slate-900 shadow-sm transition cursor-pointer">
               Returning Customer Login
@@ -214,7 +163,6 @@
             </button>
           </div>
 
-          <!-- Continue with Google Quick Option -->
           <button type="button" onclick="openGoogleModal()" class="w-full py-3 px-4 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold text-sm flex items-center justify-center gap-2.5 shadow-sm transition cursor-pointer">
             <svg class="w-5 h-5" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"/>
@@ -231,7 +179,6 @@
             <div class="flex-grow border-t border-slate-200"></div>
           </div>
 
-          <!-- Returning Customer Login Form -->
           <form id="customerLoginForm" onsubmit="handleCustomerLogin(event)" class="space-y-4">
             <div>
               <label class="block text-sm font-semibold text-slate-700 mb-1">Mobile Number</label>
@@ -239,5 +186,1687 @@
             </div>
             <div>
               <label class="block text-sm font-semibold text-slate-700 mb-1">Password</label>
-              <input id="custLoginPass" type="password" required placeholder="Enter your password" class
-```
+              <input id="custLoginPass" type="password" required placeholder="Enter your password" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm" />
+            </div>
+            <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+              Login to My Account
+            </button>
+            <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900">
+              <strong>Demo Customer Login:</strong> Mobile <code class="font-bold">9864011223</code> | Password <code class="font-bold">1234</code>
+            </div>
+          </form>
+                    <!-- One-Time Customer Sign Up Form -->
+          <form id="customerSignupForm" onsubmit="handleCustomerSignup(event)" class="hidden space-y-4">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+              Sign up <strong>once</strong> to create your shop account. You will stay logged in automatically on this device.
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Customer Full Name *</label>
+                <input id="suName" type="text" required placeholder="e.g., Rahul Das" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Father's Name *</label>
+                <input id="suFather" type="text" required placeholder="e.g., Ramesh Das" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Shop Name & Full Location / Address *</label>
+              <input id="suShop" type="text" required placeholder="e.g., Das Poultry Shop, Ganeshguri Market, Guwahati" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Mobile Number *</label>
+                <input id="suMobile" type="tel" required placeholder="10-digit mobile number" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Create Password *</label>
+                <input id="suPass" type="password" required minlength="4" placeholder="Min 4 characters" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3 rounded-xl border border-dashed border-slate-300 bg-slate-50">
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">Profile Photo (Optional)</label>
+                <input id="suPhotoInput" type="file" accept="image/*" onchange="previewFileInput(this, 'suPhotoPreview')" class="block w-full text-xs text-slate-600 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-100 file:text-emerald-800 cursor-pointer" />
+                <img id="suPhotoPreview" class="hidden mt-2 w-16 h-16 rounded-full object-cover border border-slate-300" alt="Profile Preview" />
+              </div>
+              <div class="p-3 rounded-xl border border-dashed border-slate-300 bg-slate-50">
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">ID / Shop Document (Optional)</label>
+                <input id="suDocInput" type="file" accept="image/*" onchange="previewFileInput(this, 'suDocPreview')" class="block w-full text-xs text-slate-600 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-200 file:text-slate-800 cursor-pointer" />
+                <img id="suDocPreview" class="hidden mt-2 w-full h-16 rounded-lg object-cover border border-slate-300" alt="Document Preview" />
+              </div>
+            </div>
+            <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+              Complete One-Time Sign Up & Enter Portal
+            </button>
+          </form>
+        </div>
+
+        <!-- OWNER ADMIN AUTH PANEL -->
+        <div id="ownerAuthPanel" class="hidden p-5 sm:p-6 space-y-4">
+          <div class="flex items-center gap-3 p-3.5 rounded-xl bg-slate-900 text-white">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold">Owner Admin Access</h3>
+              <p class="text-xs text-slate-300">Manage live broiler rate, daily sales, customers, receipts & weight loss.</p>
+            </div>
+          </div>
+          <form onsubmit="handleOwnerLogin(event)" class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1">Admin Password</label>
+              <input id="ownerLoginPass" type="password" required placeholder="Enter owner admin password" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm" />
+            </div>
+            <button type="submit" class="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+              Login to Owner Dashboard
+            </button>
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-xs text-slate-500">Secured Admin Portal</span>
+              <button type="button" onclick="openForgotPasswordModal()" class="text-xs font-bold text-emerald-700 hover:text-emerald-800 underline cursor-pointer">
+                Forgot Password?
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: CUSTOMER PORTAL -->
+    <section id="viewCustomer" class="hidden space-y-5 fade-in">
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div id="custHeaderAvatar" class="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-600 overflow-hidden flex items-center justify-center shrink-0"></div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h2 id="custHeaderName" class="text-lg font-extrabold text-slate-900">Customer Name</h2>
+              <span id="custHeaderKycBadge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold"></span>
+            </div>
+            <p id="custHeaderShop" class="text-xs sm:text-sm text-slate-600"></p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-slate-50 px-4 py-2.5 rounded-xl border border-slate-200">
+          <div>
+            <p class="text-[11px] font-semibold text-slate-500 uppercase">My Balance Due</p>
+            <p id="custHeaderDue" class="text-lg font-extrabold text-rose-600">₹0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+        <button onclick="switchCustomerTab('order')" id="cTab-order" class="cust-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-emerald-700 text-white shadow-sm transition cursor-pointer">Place Order</button>
+        <button onclick="switchCustomerTab('myOrders')" id="cTab-myOrders" class="cust-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">My Orders</button>
+        <button onclick="switchCustomerTab('ledger')" id="cTab-ledger" class="cust-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Account & Receipts</button>
+        <button onclick="switchCustomerTab('injured')" id="cTab-injured" class="cust-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Injured Chicken Report</button>
+        <button onclick="switchCustomerTab('profile')" id="cTab-profile" class="cust-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">My Profile & KYC</button>
+      </div>
+
+      <div id="cPanel-order" class="cust-panel bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="text-lg font-extrabold text-slate-900">Place Broiler Order</h3>
+            <p class="text-xs text-slate-500">Book your requirement for tomorrow or any upcoming delivery date.</p>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold">
+            Order Cut-Off Time: 10:00 PM for next morning delivery.
+          </div>
+        </div>
+
+        <form id="placeOrderForm" onsubmit="handlePlaceOrder(event)" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Delivery Date *</label>
+              <input id="ordDate" type="date" required class="w-full px-3.5 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm font-semibold" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Quantity (Kg)</label>
+              <input id="ordKg" type="number" min="0" step="1" value="0" oninput="updateOrderEstimate()" class="w-full px-3.5 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm font-semibold" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Quantity (Gram)</label>
+              <input id="ordGram" type="number" min="0" max="999" step="50" value="0" oninput="updateOrderEstimate()" class="w-full px-3.5 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm font-semibold" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Total Pieces</label>
+              <input id="ordPieces" type="number" min="0" step="1" value="0" class="w-full px-3.5 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm font-semibold" />
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 flex flex-wrap items-center justify-between gap-2">
+            <span class="text-xs font-semibold text-emerald-900">Estimated Value (at Today's Rate ₹<span class="live-rate-inline">148</span>/Kg):</span>
+            <span id="ordEstimateAmt" class="text-base font-extrabold text-emerald-800">₹0</span>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <label class="block text-xs font-bold text-slate-700">Order Note / Voice Message (Optional)</label>
+              <button type="button" id="voiceOrderBtn" onclick="toggleVoiceOrder()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition cursor-pointer">
+                <span id="voiceOrderBtnText">Voice Order (Speak)</span>
+              </button>
+            </div>
+            <textarea id="ordNote" rows="3" placeholder="Example: Need 60 kg medium size broilers early morning by 6 AM..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm"></textarea>
+            <p id="voiceStatusHint" class="text-xs text-slate-500">Tap "Voice Order" to speak your order.</p>
+            <div id="voiceAudioPreviewWrap" class="hidden items-center gap-2 p-2.5 rounded-xl bg-slate-100 border border-slate-200">
+              <audio id="voiceAudioPreview" controls class="h-8 flex-1"></audio>
+              <button type="button" onclick="clearVoiceAudio()" class="text-xs font-bold text-rose-600 px-2 py-1 hover:underline cursor-pointer">Remove</button>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+            Submit Order Now
+          </button>
+        </form>
+      </div>
+
+      <div id="cPanel-myOrders" class="cust-panel hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+          <h3 class="text-lg font-extrabold text-slate-900 mb-1">My Orders & Live Status</h3>
+          <p class="text-xs text-slate-500 mb-4">Only your private orders are visible here.</p>
+          <div id="custOrdersList" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <div id="cPanel-ledger" class="cust-panel hidden space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+            <p class="text-xs font-bold text-slate-500 uppercase">Total Billed</p>
+            <p id="custLedgerBilled" class="text-2xl font-extrabold text-slate-900 mt-1">₹0</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+            <p class="text-xs font-bold text-slate-500 uppercase">Total Paid</p>
+            <p id="custLedgerPaid" class="text-2xl font-extrabold text-emerald-700 mt-1">₹0</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+            <p class="text-xs font-bold text-slate-500 uppercase">Remaining Balance Due</p>
+            <p id="custLedgerDue" class="text-2xl font-extrabold text-rose-600 mt-1">₹0</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+          <h3 class="text-lg font-extrabold text-slate-900 mb-1">My Payment Receipts</h3>
+          <p class="text-xs text-slate-500 mb-4">View or download official payment receipt photos issued by ARIYAN CHICKEN.</p>
+          <div id="custReceiptsList" class="space-y-3"></div>
+        </div>
+      </div>
+      <div id="cPanel-injured" class="cust-panel hidden space-y-5">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+          <h3 class="text-lg font-extrabold text-slate-900 mb-1">Report Injured Broiler</h3>
+          <p class="text-xs text-slate-500 mb-4">Upload a clear photo and enter affected pieces/weight to inform the owner.</p>
+          <form id="injuredReportForm" onsubmit="handleInjuredReport(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Affected Pieces *</label>
+                <input id="injPieces" type="number" min="1" required placeholder="e.g., 2" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Weight (Kg)</label>
+                <input id="injKg" type="number" min="0" value="0" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Weight (Gram)</label>
+                <input id="injGram" type="number" min="0" max="999" value="0" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Upload Injured Chicken Photo *</label>
+              <input id="injPhotoInput" type="file" accept="image/*" required onchange="previewFileInput(this, 'injPhotoPreview')" class="block w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-100 file:text-emerald-800 cursor-pointer" />
+              <img id="injPhotoPreview" class="hidden mt-3 w-40 h-32 rounded-xl object-cover border border-slate-300" alt="Injured Bird Preview" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Details / Note</label>
+              <textarea id="injNote" rows="2" placeholder="Describe the condition or delivery batch..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm"></textarea>
+            </div>
+            <button type="submit" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+              Submit Injured Bird Report
+            </button>
+          </form>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+          <h4 class="text-base font-extrabold text-slate-900 mb-3">My Submitted Reports</h4>
+          <div id="custInjuredList" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <div id="cPanel-profile" class="cust-panel hidden bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="text-lg font-extrabold text-slate-900">My Profile & KYC Details</h3>
+            <p class="text-xs text-slate-500">Keep your shop address and KYC document up to date for quick verification.</p>
+          </div>
+          <span id="profKycStatusPill" class="px-3 py-1 rounded-full text-xs font-bold"></span>
+        </div>
+        <form onsubmit="handleUpdateCustomerProfile(event)" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Customer Full Name</label>
+              <input id="profName" type="text" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Father's Name</label>
+              <input id="profFather" type="text" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Shop Name & Full Location / Address</label>
+              <input id="profShop" type="text" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Mobile Number</label>
+              <input id="profMobile" type="tel" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+              <label class="block text-xs font-bold text-slate-700">Profile Photo</label>
+              <div id="profPhotoDisplay" class="w-20 h-20 rounded-full overflow-hidden border border-slate-300 bg-white flex items-center justify-center"></div>
+              <input id="profPhotoInput" type="file" accept="image/*" onchange="previewFileInput(this, 'profPhotoNewPreview')" class="block w-full text-xs text-slate-600 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-100 file:text-emerald-800 cursor-pointer" />
+              <img id="profPhotoNewPreview" class="hidden w-16 h-16 rounded-full object-cover border border-emerald-500" alt="New Profile Preview" />
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+              <label class="block text-xs font-bold text-slate-700">ID / Shop KYC Document</label>
+              <div id="profDocDisplay" class="w-full h-28 rounded-xl overflow-hidden border border-slate-300 bg-white flex items-center justify-center"></div>
+              <input id="profDocInput" type="file" accept="image/*" onchange="previewFileInput(this, 'profDocNewPreview')" class="block w-full text-xs text-slate-600 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-slate-200 file:text-slate-800 cursor-pointer" />
+              <img id="profDocNewPreview" class="hidden w-full h-24 rounded-xl object-cover border border-emerald-500" alt="New Document Preview" />
+            </div>
+          </div>
+          <button type="submit" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+            Save Profile & KYC Changes
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- VIEW 3: OWNER ADMIN DASHBOARD -->
+    <section id="viewOwner" class="hidden space-y-5 fade-in">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        <div class="lg:col-span-5 bg-slate-900 text-white rounded-2xl p-5 shadow-sm flex flex-col justify-between gap-3">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Live Rate Control</span>
+            <h2 class="text-lg font-extrabold mt-0.5">Update Today Broiler Rate</h2>
+            <p class="text-xs text-slate-300 mt-0.5">Updates the public rate banner immediately for all customers.</p>
+          </div>
+          <form onsubmit="handleUpdateRate(event)" class="flex items-center gap-2">
+            <div class="relative flex-1">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">₹</span>
+              <input id="ownerRateInput" type="number" min="1" step="1" required class="w-full pl-8 pr-12 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white font-extrabold text-base outline-none" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 font-semibold">/ Kg</span>
+            </div>
+            <button type="submit" class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm whitespace-nowrap shadow-sm transition cursor-pointer">
+              Update Rate
+            </button>
+          </form>
+        </div>
+
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col justify-between">
+            <p class="text-xs font-bold text-slate-500 uppercase">Sold Today</p>
+            <p id="kpiSoldWeight" class="text-xl font-extrabold text-emerald-800 mt-1">0 Kg 0 g</p>
+            <p id="kpiSoldPieces" class="text-xs font-semibold text-slate-500 mt-0.5">0 Pieces</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col justify-between">
+            <p class="text-xs font-bold text-slate-500 uppercase">Collected Today</p>
+            <p id="kpiCollectedToday" class="text-xl font-extrabold text-slate-900 mt-1">₹0</p>
+            <p id="kpiCollectedSplit" class="text-xs font-semibold text-slate-500 mt-0.5">Cash + UPI/Bank</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col justify-between">
+            <p class="text-xs font-bold text-slate-500 uppercase">Market Balance Due</p>
+            <p id="kpiMarketDue" class="text-xl font-extrabold text-rose-600 mt-1">₹0</p>
+            <p class="text-xs font-semibold text-slate-500 mt-0.5">Across all customers</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+        <button onclick="switchOwnerTab('sales')" id="oTab-sales" class="owner-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-emerald-700 text-white shadow-sm transition cursor-pointer">Today's Sales</button>
+        <button onclick="switchOwnerTab('orders')" id="oTab-orders" class="owner-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Order Management</button>
+        <button onclick="switchOwnerTab('customers')" id="oTab-customers" class="owner-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Customers & KYC</button>
+        <button onclick="switchOwnerTab('receipt')" id="oTab-receipt" class="owner-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Money Receipt</button>
+        <button onclick="switchOwnerTab('weightloss')" id="oTab-weightloss" class="owner-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Weight Loss</button>
+        <button onclick="switchOwnerTab('settings')" id="oTab-settings" class="owner-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Admin Settings</button>
+      </div>
+
+      <div id="oPanel-sales" class="owner-panel space-y-5">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-4 sm:p-5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-900">Today's Customer-Wise Sales List</h3>
+              <p class="text-xs text-slate-500">Customer Name on Left • Exact Weight Taken Today (Kg & Gram) on Right</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <input id="salesListDateFilter" type="date" onchange="renderOwnerSalesList()" class="px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold text-slate-700" />
+              <button onclick="openQuickSaleModal()" class="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold shadow-sm transition cursor-pointer">+ Add Direct Sale</button>
+            </div>
+          </div>
+          <div class="px-4 sm:px-5 py-2.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+            <span>Customer & Shop Name</span>
+            <span class="text-right">Weight Taken (Kg & Gram)</span>
+          </div>
+          <div id="ownerSalesListBody" class="divide-y divide-slate-100"></div>
+          <div class="bg-slate-900 text-white px-4 sm:px-5 py-4 space-y-2">
+            <div class="flex items-center justify-between text-sm sm:text-base font-extrabold">
+              <span class="text-emerald-300">Total Kg Sold Today:</span>
+              <span id="salesFooterTotalKg" class="text-white">0 Kg 0 g</span>
+            </div>
+            <div class="flex items-center justify-between text-sm sm:text-base font-extrabold border-t border-slate-700 pt-2">
+              <span class="text-amber-300">Today's Weight Loss:</span>
+              <span id="salesFooterWeightLoss" class="text-amber-200">0 Kg 0 g</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="oPanel-orders" class="owner-panel hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-900">Order Management</h3>
+              <p class="text-xs text-slate-500">Filter by delivery date, update status, and confirm final delivered weight & bill.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="setOrderDateFilter('today')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 cursor-pointer">Today</button>
+              <button onclick="setOrderDateFilter('tomorrow')" class="px-3 py-1.5 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-xs font-bold text-emerald-900 cursor-pointer">Tomorrow</button>
+              <button onclick="setOrderDateFilter('all')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 cursor-pointer">All Dates</button>
+              <input id="ownerOrderDateFilter" type="date" onchange="renderOwnerOrders()" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-bold text-slate-700" />
+            </div>
+          </div>
+          <div id="ownerOrdersContainer" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <div id="oPanel-customers" class="owner-panel hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-900">Customer Directory & KYC</h3>
+              <p class="text-xs text-slate-500">Tap any customer to view KYC documents, full order history, payments, and injured reports.</p>
+            </div>
+            <input id="ownerCustomerSearch" type="text" oninput="renderOwnerCustomers()" placeholder="Search customer, shop, mobile..." class="w-full sm:w-64 px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none" />
+          </div>
+          <div id="ownerCustomersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        </div>
+      </div>
+      <div id="oPanel-receipt" class="owner-panel hidden space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-900">Create Digital Money Receipt</h3>
+              <p class="text-xs text-slate-500">Record a payment and generate a WhatsApp-ready PNG receipt photo.</p>
+            </div>
+            <form id="receiptForm" onsubmit="handleCreateReceipt(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Select Customer *</label>
+                <select id="recCustomerSelect" required onchange="updateReceiptPreviewCalc()" class="w-full px-3.5 py-3 rounded-xl border border-slate-300 text-sm font-semibold"></select>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Amount Paid (₹) *</label>
+                  <input id="recAmountInput" type="number" min="1" required oninput="updateReceiptPreviewCalc()" placeholder="Enter amount" class="w-full px-3.5 py-3 rounded-xl border border-slate-300 text-sm font-extrabold" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Payment Mode *</label>
+                  <select id="recModeSelect" onchange="updateReceiptPreviewCalc()" class="w-full px-3.5 py-3 rounded-xl border border-slate-300 text-sm font-semibold">
+                    <option value="Cash">Cash</option>
+                    <option value="UPI">UPI</option>
+                    <option value="Bank">Bank Transfer</option>
+                  </select>
+                </div>
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-sm">
+                <div class="flex justify-between"><span class="text-slate-600">Previous Balance Due:</span><strong id="recCalcPrevDue" class="text-slate-900">₹0</strong></div>
+                <div class="flex justify-between"><span class="text-slate-600">Amount Paid Now:</span><strong id="recCalcPaidNow" class="text-emerald-700">₹0</strong></div>
+                <div class="flex justify-between pt-1.5 border-t border-slate-200 text-base"><span class="font-bold text-slate-800">Remaining Balance:</span><strong id="recCalcRemDue" class="text-rose-600">₹0</strong></div>
+              </div>
+              <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+                Save Payment & Generate Receipt Photo
+              </button>
+            </form>
+          </div>
+          <div class="lg:col-span-6 space-y-3">
+            <div id="liveReceiptCard" class="bg-white rounded-2xl border-2 border-emerald-700 shadow-md overflow-hidden"></div>
+            <div id="latestReceiptActions" class="hidden flex flex-wrap gap-2">
+              <button onclick="downloadCurrentReceiptPNG()" class="flex-1 py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold shadow-sm transition cursor-pointer">Download Receipt Photo (PNG)</button>
+              <button onclick="shareCurrentReceiptWhatsApp()" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow-sm transition cursor-pointer">Share on WhatsApp</button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+          <h4 class="text-base font-extrabold text-slate-900 mb-3">Recent Payment Receipts</h4>
+          <div id="ownerReceiptsHistory" class="space-y-2.5"></div>
+        </div>
+      </div>
+
+      <div id="oPanel-weightloss" class="owner-panel hidden space-y-5">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+          <div>
+            <h3 class="text-lg font-extrabold text-slate-900">Daily Weight Loss Tracker</h3>
+            <p class="text-xs text-slate-500">Record daily weight loss (Kg & Gram). Today's entries automatically appear at the bottom of Today's Sales List.</p>
+          </div>
+          <form id="weightLossForm" onsubmit="handleAddWeightLoss(event)" class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+            <div class="sm:col-span-3"><label class="block text-xs font-bold text-slate-700 mb-1">Date *</label><input id="wlDate" type="date" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold" /></div>
+            <div class="sm:col-span-2"><label class="block text-xs font-bold text-slate-700 mb-1">Loss (Kg)</label><input id="wlKg" type="number" min="0" value="0" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold" /></div>
+            <div class="sm:col-span-2"><label class="block text-xs font-bold text-slate-700 mb-1">Loss (Gram)</label><input id="wlGram" type="number" min="0" max="999" value="0" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold" /></div>
+            <div class="sm:col-span-3"><label class="block text-xs font-bold text-slate-700 mb-1">Note (Optional)</label><input id="wlNote" type="text" placeholder="e.g., Transit shrinkage" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm" /></div>
+            <div class="sm:col-span-2"><button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-sm transition cursor-pointer">Save Loss</button></div>
+          </form>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+          <h4 class="text-base font-extrabold text-slate-900 mb-3">Weight Loss History</h4>
+          <div id="weightLossHistoryList" class="divide-y divide-slate-100"></div>
+        </div>
+      </div>
+
+      <div id="oPanel-settings" class="owner-panel hidden space-y-5">
+        <div class="max-w-lg bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-4">
+          <div>
+            <h3 class="text-lg font-extrabold text-slate-900">Change Admin Password</h3>
+            <p class="text-xs text-slate-500">Update your Owner Dashboard password anytime.</p>
+          </div>
+          <form id="changeAdminPassForm" onsubmit="handleChangeAdminPassword(event)" class="space-y-4">
+            <div><label class="block text-xs font-bold text-slate-700 mb-1">Current Password *</label><input id="admCurrPass" type="password" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" /></div>
+            <div><label class="block text-xs font-bold text-slate-700 mb-1">New Password *</label><input id="admNewPass" type="password" required minlength="4" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" /></div>
+            <div><label class="block text-xs font-bold text-slate-700 mb-1">Confirm New Password *</label><input id="admConfirmPass" type="password" required minlength="4" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" /></div>
+            <button type="submit" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-sm transition cursor-pointer">Update Admin Password</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="fixed bottom-0 left-0 right-0 z-30 bg-slate-900 text-white border-t border-slate-700 shadow-lg">
+        <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 grid grid-cols-3 gap-2 text-center sm:text-left">
+          <div class="sm:flex sm:items-center sm:gap-2">
+            <span class="block text-[10px] sm:text-xs text-slate-400 font-semibold uppercase">Sold Today</span>
+            <span id="barSoldToday" class="text-xs sm:text-sm font-extrabold text-emerald-400">0 Kg 0 g (0 Pcs)</span>
+          </div>
+          <div class="sm:flex sm:items-center sm:gap-2 sm:justify-center">
+            <span class="block text-[10px] sm:text-xs text-slate-400 font-semibold uppercase">Collected Today</span>
+            <span id="barCollectedToday" class="text-xs sm:text-sm font-extrabold text-white">₹0</span>
+          </div>
+          <div class="sm:flex sm:items-center sm:gap-2 sm:justify-end">
+            <span class="block text-[10px] sm:text-xs text-slate-400 font-semibold uppercase">Market Due</span>
+            <span id="barMarketDue" class="text-xs sm:text-sm font-extrabold text-rose-400">₹0</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODALS -->
+  <div id="customerDetailModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div class="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 fade-in">
+      <div class="sticky top-0 z-10 bg-white px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+        <h3 class="text-lg font-extrabold text-slate-900">Customer Profile & Full History</h3>
+        <button onclick="closeModal('customerDetailModal')" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 font-bold cursor-pointer">✕</button>
+      </div>
+      <div id="customerDetailBody" class="p-5 space-y-5"></div>
+    </div>
+  </div>
+
+  <div id="receiptViewModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-slate-200 overflow-hidden fade-in">
+      <div class="px-5 py-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+        <h3 class="text-base font-extrabold text-slate-900">Digital Money Receipt</h3>
+        <button onclick="closeModal('receiptViewModal')" class="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 flex items-center justify-center text-slate-700 font-bold cursor-pointer">✕</button>
+      </div>
+      <div class="p-4 space-y-4">
+        <div id="receiptModalCard"></div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <button onclick="downloadModalReceiptPNG()" class="flex-1 py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold transition cursor-pointer">Download Receipt Photo (PNG)</button>
+          <button onclick="shareModalReceiptWhatsApp()" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold transition cursor-pointer">Share on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="forgotPassModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl border border-slate-200 space-y-4 fade-in">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-extrabold text-slate-900">Reset Owner Password</h3>
+        <button onclick="closeModal('forgotPassModal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 font-bold cursor-pointer">✕</button>
+      </div>
+      <p class="text-xs text-slate-600">Verify with the registered Owner Mobile Number (<strong>60009 11910</strong>) to set a new admin password.</p>
+      <form onsubmit="handleResetOwnerPassword(event)" class="space-y-3">
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Owner Mobile Number</label><input id="fpMobile" type="tel" required placeholder="Enter 60009 11910" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" /></div>
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">New Admin Password</label><input id="fpNewPass" type="password" required minlength="4" placeholder="Enter new password" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" /></div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm cursor-pointer">Verify & Reset Password</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="googleModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl border border-slate-200 space-y-4 fade-in">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-extrabold text-slate-900">Continue with Google</h3>
+        <button onclick="closeModal('googleModal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 font-bold cursor-pointer">✕</button>
+      </div>
+      <div id="googleAccountList" class="space-y-2 max-h-48 overflow-y-auto"></div>
+      <div class="border-t border-slate-200 pt-3">
+        <form onsubmit="handleGoogleNewSignup(event)" class="space-y-2.5">
+          <p class="text-xs font-bold text-slate-700">Or link a new Google account:</p>
+          <input id="gNewName" type="text" required placeholder="Your Full Name" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+          <input id="gNewShop" type="text" required placeholder="Shop Name & Location" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+          <input id="gNewMobile" type="tel" required placeholder="Mobile Number" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm cursor-pointer">Sign In & Remember Me</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="quickSaleModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl border border-slate-200 space-y-4 fade-in">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-extrabold text-slate-900">Add Direct Sale</h3>
+        <button onclick="closeModal('quickSaleModal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 font-bold cursor-pointer">✕</button>
+      </div>
+      <form onsubmit="handleAddDirectSale(event)" class="space-y-3">
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Customer *</label><select id="qsCustomer" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold"></select></div>
+        <div class="grid grid-cols-3 gap-2">
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Kg</label><input id="qsKg" type="number" min="0" value="0" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold" /></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Gram</label><input id="qsGram" type="number" min="0" max="999" value="0" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold" /></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Pieces</label><input id="qsPieces" type="number" min="0" value="0" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold" /></div>
+        </div>
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Delivery Date</label><input id="qsDate" type="date" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold" /></div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm cursor-pointer">Save Delivered Sale</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="confirmModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl border border-slate-200 space-y-4 fade-in">
+      <h3 id="confirmTitle" class="text-base font-extrabold text-slate-900">Confirm Action</h3>
+      <p id="confirmMessage" class="text-sm text-slate-600"></p>
+      <div class="flex gap-2 justify-end">
+        <button onclick="closeModal('confirmModal')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold cursor-pointer">Cancel</button>
+        <button id="confirmOkBtn" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-bold cursor-pointer">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="fixed top-20 right-4 z-50 space-y-2 max-w-xs w-full pointer-events-none"></div>
+  <canvas id="receiptCanvas" class="hidden"></canvas>
+  <canvas id="compressCanvas" class="hidden"></canvas>
+
+  <script>
+    'use strict';
+    const DB_KEY = 'ariyan_chicken_db_v1';
+    const SESSION_KEY = 'ariyan_chicken_session_v1';
+    const OWNER_CONTACT_RAW = '6000911910';
+    const OWNER_CONTACT_DISPLAY = '60009 11910';
+
+    let db = null;
+    let session = null;
+    let activeReceiptForModal = null;
+    let latestCreatedReceipt = null;
+    let pendingVoiceAudioDataUrl = null;
+    let speechRecognition = null;
+    let mediaRecorder = null;
+    let isRecordingVoice = false;
+    function getLocalDateString(offsetDays = 0) {
+      const d = new Date();
+      d.setDate(d.getDate() + offsetDays);
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
+
+    function formatDisplayDateTime(dateObj = new Date()) {
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const dd = String(dateObj.getDate()).padStart(2, '0');
+      const mmm = months[dateObj.getMonth()];
+      const yyyy = dateObj.getFullYear();
+      let hrs = dateObj.getHours();
+      const mins = String(dateObj.getMinutes()).padStart(2, '0');
+      const ampm = hrs >= 12 ? 'PM' : 'AM';
+      hrs = hrs % 12 || 12;
+      return `${dd} ${mmm} ${yyyy} | ${String(hrs).padStart(2, '0')}:${mins} ${ampm}`;
+    }
+
+    function formatShortDate(isoDateStr) {
+      if (!isoDateStr) return '';
+      const parts = isoDateStr.split('-');
+      if (parts.length !== 3) return isoDateStr;
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${parts[2]} ${months[parseInt(parts[1], 10) - 1] || ''} ${parts[0]}`;
+    }
+
+    function toTotalGrams(kg, gram) {
+      return (Math.max(0, parseInt(kg, 10) || 0) * 1000) + Math.max(0, parseInt(gram, 10) || 0);
+    }
+
+    function formatWeight(totalGrams) {
+      const g = Math.max(0, Math.round(totalGrams || 0));
+      return `${Math.floor(g / 1000)} Kg ${g % 1000} g`;
+    }
+
+    function calcBillAmount(kg, gram, rate) {
+      return Math.round((toTotalGrams(kg, gram) / 1000) * (Number(rate) || 0));
+    }
+
+    function formatRupees(amount) {
+      return '₹' + Math.round(Number(amount) || 0).toLocaleString('en-IN');
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    function generateId(prefix) {
+      return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
+    }
+
+    function createInitialDemoData() {
+      const today = getLocalDateString(0);
+      const tomorrow = getLocalDateString(1);
+      const yesterday = getLocalDateString(-1);
+      return {
+        adminPassword: 'Ariyan@026',
+        broilerRate: 148,
+        rateUpdatedAt: formatDisplayDateTime(new Date()),
+        receiptCounter: 1004,
+        customers: [
+          { id: 'cust_1', name: 'Imran Ali', fatherName: 'Abdul Karim', shopName: 'Ali Fresh Chicken Center, Beltola Market, Guwahati', mobile: '9864011223', password: '1234', photo: '', kycDoc: 'DEMO_VERIFIED_DOC', kycVerified: true, createdAt: yesterday },
+          { id: 'cust_2', name: 'Bikash Kalita', fatherName: 'Nagen Kalita', shopName: 'Kalita Poultry House, Six Mile, Guwahati', mobile: '9864055667', password: '1234', photo: '', kycDoc: 'DEMO_PENDING_DOC', kycVerified: false, createdAt: yesterday },
+          { id: 'cust_3', name: 'Suresh Sharma', fatherName: 'Mohan Sharma', shopName: 'Sharma Meat & Broiler Shop, Ganeshguri', mobile: '9864099881', password: '1234', photo: '', kycDoc: 'DEMO_VERIFIED_DOC', kycVerified: true, createdAt: yesterday }
+        ],
+        orders: [
+          { id: 'ord_101', customerId: 'cust_1', deliveryDate: today, kg: 85, gram: 500, pieces: 42, rateApplied: 148, billAmount: calcBillAmount(85, 500, 148), status: 'Delivered', note: 'Delivered early morning 6:15 AM', voiceAudio: '', createdAt: yesterday },
+          { id: 'ord_102', customerId: 'cust_2', deliveryDate: today, kg: 62, gram: 250, pieces: 31, rateApplied: 148, billAmount: calcBillAmount(62, 250, 148), status: 'Delivered', note: 'Medium size birds', voiceAudio: '', createdAt: yesterday },
+          { id: 'ord_103', customerId: 'cust_3', deliveryDate: today, kg: 48, gram: 0, pieces: 24, rateApplied: 148, billAmount: calcBillAmount(48, 0, 148), status: 'Delivered', note: '', voiceAudio: '', createdAt: yesterday },
+          { id: 'ord_104', customerId: 'cust_1', deliveryDate: tomorrow, kg: 90, gram: 0, pieces: 45, rateApplied: 148, billAmount: calcBillAmount(90, 0, 148), status: 'Confirmed', note: 'Please send fresh morning batch before 6:30 AM', voiceAudio: '', createdAt: today },
+          { id: 'ord_105', customerId: 'cust_2', deliveryDate: tomorrow, kg: 55, gram: 500, pieces: 28, rateApplied: 148, billAmount: calcBillAmount(55, 500, 148), status: 'Pending', note: 'Call on arrival', voiceAudio: '', createdAt: today }
+        ],
+        receipts: [
+          { id: 'rec_1001', receiptNo: 'AC-1001', customerId: 'cust_1', date: today, dateTime: formatDisplayDateTime(new Date()), mode: 'UPI', previousDue: calcBillAmount(85, 500, 148), amountPaid: 10000, remainingDue: calcBillAmount(85, 500, 148) - 10000 },
+          { id: 'rec_1002', receiptNo: 'AC-1002', customerId: 'cust_2', date: today, dateTime: formatDisplayDateTime(new Date()), mode: 'Cash', previousDue: calcBillAmount(62, 250, 148), amountPaid: 5000, remainingDue: calcBillAmount(62, 250, 148) - 5000 },
+          { id: 'rec_1003', receiptNo: 'AC-1003', customerId: 'cust_3', date: today, dateTime: formatDisplayDateTime(new Date()), mode: 'Bank', previousDue: calcBillAmount(48, 0, 148), amountPaid: 7104, remainingDue: 0 }
+        ],
+        weightLosses: [
+          { id: 'wl_1', date: today, kg: 3, gram: 400, note: 'Morning vehicle transit & cage weight loss' },
+          { id: 'wl_2', date: yesterday, kg: 2, gram: 750, note: 'Daily loading shrinkage' }
+        ],
+        injuredReports: [
+          { id: 'inj_1', customerId: 'cust_1', date: today, dateTime: formatDisplayDateTime(new Date()), pieces: 1, kg: 2, gram: 100, note: 'One bird had a leg injury during unloading.', photo: 'DEMO_INJURED_PHOTO' }
+        ]
+      };
+    }
+
+    function loadDatabase() {
+      try {
+        const raw = localStorage.getItem(DB_KEY);
+        if (raw) {
+          db = JSON.parse(raw);
+          if (!db.adminPassword) db.adminPassword = 'Ariyan@026';
+          if (!Array.isArray(db.customers)) db.customers = [];
+          if (!Array.isArray(db.orders)) db.orders = [];
+          if (!Array.isArray(db.receipts)) db.receipts = [];
+          if (!Array.isArray(db.weightLosses)) db.weightLosses = [];
+          if (!Array.isArray(db.injuredReports)) db.injuredReports = [];
+          return;
+        }
+      } catch (err) {}
+      db = createInitialDemoData();
+      saveDatabase();
+    }
+
+    function saveDatabase() {
+      try {
+        localStorage.setItem(DB_KEY, JSON.stringify(db));
+        if (window.cloudSync && typeof window.cloudSync.pushChanges === 'function') {
+          window.cloudSync.pushChanges();
+        }
+        return true;
+      } catch (err) {
+        showToast('Device storage is full. Try uploading smaller photos.', 'error');
+        return false;
+      }
+    }
+
+    function loadSession() {
+      try { const raw = localStorage.getItem(SESSION_KEY); if (raw) session = JSON.parse(raw); } catch (err) { session = null; }
+    }
+
+    function saveSession(newSession) {
+      session = newSession;
+      try {
+        if (newSession) localStorage.setItem(SESSION_KEY, JSON.stringify(newSession));
+        else localStorage.removeItem(SESSION_KEY);
+      } catch (err) {}
+    }
+
+    function initOfflineSupport() {
+      updateNetworkBadge();
+      window.addEventListener('online', () => { updateNetworkBadge(); showToast('Back Online! All local data is synced safely.', 'success'); });
+      window.addEventListener('offline', () => { updateNetworkBadge(); showToast('Offline Mode active. All changes are saved locally.', 'info'); });
+    }
+
+    function updateNetworkBadge() {
+      const badge = document.getElementById('networkStatusBadge');
+      const dot = document.getElementById('networkStatusDot');
+      const text = document.getElementById('networkStatusText');
+      const isCloudLive = !!(window.cloudSync && window.cloudSync.isConnected);
+      if (navigator.onLine) {
+        badge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-900/80 text-emerald-200 border border-emerald-700/70';
+        dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
+        text.textContent = isCloudLive ? 'Online • Live Sync' : 'Online (Local)';
+      } else {
+        badge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-900/90 text-amber-200 border border-amber-600';
+        dot.className = 'w-2 h-2 rounded-full bg-amber-400';
+        text.textContent = 'Offline Mode - Saved Locally';
+      }
+    }
+
+    function handleLiveCloudRefresh() {
+      updateLiveHeader();
+      if (!session) return;
+      if (session.role === 'customer') {
+        const cust = db.customers.find(c => c.id === session.customerId);
+        if (!cust) return;
+        const ledger = getCustomerLedger(cust.id);
+        document.getElementById('custHeaderDue').textContent = formatRupees(ledger.balanceDue);
+        const kycBadge = document.getElementById('custHeaderKycBadge');
+        if (cust.kycVerified) {
+          kycBadge.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200';
+          kycBadge.textContent = '✓ KYC Verified';
+        }
+        updateOrderEstimate();
+        renderCustomerOrders(cust.id);
+        renderCustomerLedger(cust.id);
+        renderCustomerInjuredReports(cust.id);
+      } else if (session.role === 'owner') {
+        renderOwnerKPIs();
+        renderOwnerSalesList();
+        renderOwnerCustomers();
+        renderOwnerReceiptsHistory();
+        renderWeightLossHistory();
+        const activeTag = document.activeElement ? document.activeElement.tagName : '';
+        const insideOrders = document.activeElement && document.activeElement.closest('#ownerOrdersContainer');
+        if (!insideOrders || (activeTag !== 'INPUT' && activeTag !== 'SELECT')) renderOwnerOrders();
+      }
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const el = document.createElement('div');
+      const styles = { success: 'bg-emerald-800 text-white border-emerald-700', error: 'bg-rose-700 text-white border-rose-600', info: 'bg-slate-900 text-white border-slate-700' };
+      el.className = `pointer-events-auto px-4 py-3 rounded-xl border shadow-lg text-xs sm:text-sm font-semibold fade-in ${styles[type] || styles.info}`;
+      el.textContent = message;
+      container.appendChild(el);
+      setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity 0.25s ease'; setTimeout(() => el.remove(), 260); }, 3200);
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    function showConfirmDialog(title, message, onConfirm) {
+      document.getElementById('confirmTitle').textContent = title;
+      document.getElementById('confirmMessage').textContent = message;
+      const okBtn = document.getElementById('confirmOkBtn');
+      const newBtn = okBtn.cloneNode(true);
+      okBtn.parentNode.replaceChild(newBtn, okBtn);
+      newBtn.addEventListener('click', () => { closeModal('confirmModal'); onConfirm(); });
+      openModal('confirmModal');
+    }
+
+    function compressImageFile(file, maxWidth = 480, quality = 0.72) {
+      return new Promise((resolve) => {
+        if (!file) return resolve('');
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.getElementById('compressCanvas');
+            const scale = Math.min(1, maxWidth / img.width);
+            canvas.width = Math.round(img.width * scale);
+            canvas.height = Math.round(img.height * scale);
+            canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = () => resolve('');
+          img.src = e.target.result;
+        };
+        reader.onerror = () => resolve('');
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function previewFileInput(inputEl, previewImgId) {
+      const file = inputEl.files && inputEl.files[0];
+      const imgEl = document.getElementById(previewImgId);
+      if (!file) { imgEl.classList.add('hidden'); imgEl.src = ''; return; }
+      const compressed = await compressImageFile(file, 480, 0.75);
+      if (compressed) { imgEl.src = compressed; imgEl.classList.remove('hidden'); }
+    }
+
+    function renderAvatarMarkup(customer, sizeClass = 'w-12 h-12') {
+      if (customer && customer.photo) return `<img src="${customer.photo}" alt="${escapeHtml(customer.name)}" class="${sizeClass} rounded-full object-cover" />`;
+      const initials = (customer && customer.name ? customer.name.split(' ').map(w => w[0]).join('').slice(0, 2) : 'AC').toUpperCase();
+      return `<div class="${sizeClass} rounded-full bg-emerald-100 text-emerald-800 font-extrabold flex items-center justify-center text-sm">${escapeHtml(initials)}</div>`;
+    }
+
+    function renderDocPreviewMarkup(docValue) {
+      if (!docValue) return `<div class="text-xs text-slate-400 font-medium p-4 text-center">No KYC Document Uploaded Yet</div>`;
+      if (docValue === 'DEMO_VERIFIED_DOC' || docValue === 'DEMO_PENDING_DOC') {
+        return `<div class="w-full h-full bg-emerald-50 p-3 flex flex-col items-center justify-center text-center"><span class="text-xs font-bold text-emerald-900">Shop Trade License / ID Card</span><span class="text-[11px] text-emerald-700">Sample KYC Document Attached</span></div>`;
+      }
+      return `<img src="${docValue}" alt="KYC Document" class="w-full h-full object-contain bg-white" />`;
+    }
+
+    function renderInjuredPhotoMarkup(photoValue) {
+      if (photoValue === 'DEMO_INJURED_PHOTO') return `<div class="w-24 h-20 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-center p-1 shrink-0"><span class="text-[10px] font-bold text-amber-800">Sample Photo</span></div>`;
+      if (photoValue) return `<img src="${photoValue}" alt="Injured Broiler" class="w-24 h-20 rounded-xl object-cover border border-slate-200 shrink-0" />`;
+      return '';
+    }
+
+    function getCustomerLedger(customerId) {
+      const totalBilled = db.orders.filter(o => o.customerId === customerId && o.status === 'Delivered').reduce((s, o) => s + (Number(o.billAmount) || 0), 0);
+      const totalPaid = db.receipts.filter(r => r.customerId === customerId).reduce((s, r) => s + (Number(r.amountPaid) || 0), 0);
+      return { totalBilled, totalPaid, balanceDue: Math.max(0, totalBilled - totalPaid) };
+    }
+
+    function getTotalMarketBalanceDue() {
+      return db.customers.reduce((sum, c) => sum + getCustomerLedger(c.id).balanceDue, 0);
+    }
+
+    function getTodaySummary(dateStr = getLocalDateString(0)) {
+      const deliveredToday = db.orders.filter(o => o.deliveryDate === dateStr && o.status === 'Delivered');
+      const totalGrams = deliveredToday.reduce((sum, o) => sum + toTotalGrams(o.kg, o.gram), 0);
+      const totalPieces = deliveredToday.reduce((sum, o) => sum + (parseInt(o.pieces, 10) || 0), 0);
+      const totalBilledToday = deliveredToday.reduce((sum, o) => sum + (Number(o.billAmount) || 0), 0);
+      const receiptsToday = db.receipts.filter(r => r.date === dateStr);
+      const totalCollected = receiptsToday.reduce((sum, r) => sum + (Number(r.amountPaid) || 0), 0);
+      const cashCollected = receiptsToday.filter(r => r.mode === 'Cash').reduce((sum, r) => sum + (Number(r.amountPaid) || 0), 0);
+      const totalLossGrams = db.weightLosses.filter(w => w.date === dateStr).reduce((sum, w) => sum + toTotalGrams(w.kg, w.gram), 0);
+      return { deliveredToday, totalGrams, totalPieces, totalBilledToday, totalCollected, cashCollected, digitalCollected: totalCollected - cashCollected, totalLossGrams };
+    }
+    function updateLiveHeader() {
+      document.getElementById('publicRateValue').textContent = db.broilerRate;
+      document.querySelectorAll('.live-rate-inline').forEach(el => { el.textContent = db.broilerRate; });
+      document.getElementById('liveDateTimeDisplay').textContent = formatDisplayDateTime(new Date());
+    }
+
+    function renderAppShell() {
+      updateLiveHeader();
+      const viewLanding = document.getElementById('viewLanding');
+      const viewCustomer = document.getElementById('viewCustomer');
+      const viewOwner = document.getElementById('viewOwner');
+      const userControls = document.getElementById('headerUserControls');
+      const userLabel = document.getElementById('headerUserLabel');
+
+      viewLanding.classList.add('hidden');
+      viewCustomer.classList.add('hidden');
+      viewOwner.classList.add('hidden');
+
+      if (!session) {
+        userControls.classList.add('hidden');
+        userControls.classList.remove('flex');
+        viewLanding.classList.remove('hidden');
+        return;
+      }
+
+      userControls.classList.remove('hidden');
+      userControls.classList.add('flex');
+
+      if (session.role === 'owner') {
+        userLabel.textContent = 'Owner Admin';
+        viewOwner.classList.remove('hidden');
+        renderOwnerDashboard();
+      } else if (session.role === 'customer') {
+        const cust = db.customers.find(c => c.id === session.customerId);
+        if (!cust) { saveSession(null); renderAppShell(); return; }
+        userLabel.textContent = cust.name;
+        viewCustomer.classList.remove('hidden');
+        renderCustomerPortal(cust);
+      }
+    }
+
+    function switchAuthTab(role) {
+      const custTab = document.getElementById('authTabCustomer');
+      const ownTab = document.getElementById('authTabOwner');
+      const custPanel = document.getElementById('customerAuthPanel');
+      const ownPanel = document.getElementById('ownerAuthPanel');
+      if (role === 'customer') {
+        custTab.className = 'py-3.5 text-sm font-bold text-center border-b-2 border-emerald-700 text-emerald-800 bg-white transition cursor-pointer';
+        ownTab.className = 'py-3.5 text-sm font-bold text-center border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition cursor-pointer';
+        custPanel.classList.remove('hidden');
+        ownPanel.classList.add('hidden');
+      } else {
+        ownTab.className = 'py-3.5 text-sm font-bold text-center border-b-2 border-slate-900 text-slate-900 bg-white transition cursor-pointer';
+        custTab.className = 'py-3.5 text-sm font-bold text-center border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition cursor-pointer';
+        ownPanel.classList.remove('hidden');
+        custPanel.classList.add('hidden');
+      }
+    }
+
+    function switchCustomerAuthMode(mode) {
+      const loginBtn = document.getElementById('custSubLoginBtn');
+      const signupBtn = document.getElementById('custSubSignupBtn');
+      const loginForm = document.getElementById('customerLoginForm');
+      const signupForm = document.getElementById('customerSignupForm');
+      if (mode === 'login') {
+        loginBtn.className = 'flex-1 py-2 text-sm font-bold rounded-lg bg-white text-slate-900 shadow-sm transition cursor-pointer';
+        signupBtn.className = 'flex-1 py-2 text-sm font-bold rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer';
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+      } else {
+        signupBtn.className = 'flex-1 py-2 text-sm font-bold rounded-lg bg-white text-slate-900 shadow-sm transition cursor-pointer';
+        loginBtn.className = 'flex-1 py-2 text-sm font-bold rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer';
+        signupForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+      }
+    }
+
+    function handleCustomerLogin(e) {
+      e.preventDefault();
+      const mobile = document.getElementById('custLoginMobile').value.replace(/\s+/g, '');
+      const pass = document.getElementById('custLoginPass').value;
+      const customer = db.customers.find(c => c.mobile.replace(/\s+/g, '') === mobile && c.password === pass);
+      if (!customer) { showToast('Invalid mobile number or password.', 'error'); return; }
+      saveSession({ role: 'customer', customerId: customer.id });
+      showToast(`Welcome back, ${customer.name}!`, 'success');
+      renderAppShell();
+    }
+
+    async function handleCustomerSignup(e) {
+      e.preventDefault();
+      const name = document.getElementById('suName').value.trim();
+      const fatherName = document.getElementById('suFather').value.trim();
+      const shopName = document.getElementById('suShop').value.trim();
+      const mobile = document.getElementById('suMobile').value.replace(/\s+/g, '');
+      const password = document.getElementById('suPass').value;
+      if (db.customers.some(c => c.mobile.replace(/\s+/g, '') === mobile)) {
+        showToast('This mobile number is already registered. Please login instead.', 'error');
+        switchCustomerAuthMode('login');
+        document.getElementById('custLoginMobile').value = mobile;
+        return;
+      }
+      const photo = await compressImageFile(document.getElementById('suPhotoInput').files[0], 320, 0.72);
+      const kycDoc = await compressImageFile(document.getElementById('suDocInput').files[0], 540, 0.72);
+      const newCustomer = { id: generateId('cust'), name, fatherName, shopName, mobile, password, photo, kycDoc, kycVerified: false, createdAt: getLocalDateString(0) };
+      db.customers.push(newCustomer);
+      saveDatabase();
+      saveSession({ role: 'customer', customerId: newCustomer.id });
+      document.getElementById('customerSignupForm').reset();
+      showToast('Sign up complete!', 'success');
+      renderAppShell();
+    }
+
+    function openGoogleModal() {
+      document.getElementById('googleAccountList').innerHTML = db.customers.map(c => `
+        <button type="button" onclick="quickGoogleLogin('${c.id}')" class="w-full p-3 rounded-xl border border-slate-200 hover:bg-emerald-50 flex items-center justify-between gap-3 text-left transition cursor-pointer">
+          <div class="flex items-center gap-3 min-w-0">${renderAvatarMarkup(c, 'w-10 h-10 shrink-0')}<div class="min-w-0"><p class="text-sm font-bold text-slate-900 truncate">${escapeHtml(c.name)}</p><p class="text-xs text-slate-500 truncate">${escapeHtml(c.shopName)}</p></div></div>
+          <span class="text-xs font-bold text-emerald-700 shrink-0">Continue →</span>
+        </button>`).join('');
+      openModal('googleModal');
+    }
+
+    function quickGoogleLogin(customerId) {
+      const cust = db.customers.find(c => c.id === customerId);
+      if (!cust) return;
+      saveSession({ role: 'customer', customerId: cust.id });
+      closeModal('googleModal');
+      showToast(`Signed in as ${cust.name}`, 'success');
+      renderAppShell();
+    }
+
+    function handleGoogleNewSignup(e) {
+      e.preventDefault();
+      const name = document.getElementById('gNewName').value.trim();
+      const shopName = document.getElementById('gNewShop').value.trim();
+      const mobile = document.getElementById('gNewMobile').value.replace(/\s+/g, '');
+      const existing = db.customers.find(c => c.mobile.replace(/\s+/g, '') === mobile);
+      if (existing) { quickGoogleLogin(existing.id); return; }
+      const newCustomer = { id: generateId('cust'), name, fatherName: 'Not Provided', shopName, mobile, password: 'google_quick_login', photo: '', kycDoc: '', kycVerified: false, createdAt: getLocalDateString(0) };
+      db.customers.push(newCustomer);
+      saveDatabase();
+      saveSession({ role: 'customer', customerId: newCustomer.id });
+      closeModal('googleModal');
+      showToast('Account linked!', 'success');
+      renderAppShell();
+    }
+
+    function handleOwnerLogin(e) {
+      e.preventDefault();
+      if (document.getElementById('ownerLoginPass').value !== db.adminPassword) { showToast('Incorrect Owner Admin password.', 'error'); return; }
+      document.getElementById('ownerLoginPass').value = '';
+      saveSession({ role: 'owner' });
+      showToast('Welcome to ARIYAN CHICKEN Owner Dashboard!', 'success');
+      renderAppShell();
+    }
+
+    function openForgotPasswordModal() {
+      document.getElementById('fpMobile').value = '';
+      document.getElementById('fpNewPass').value = '';
+      openModal('forgotPassModal');
+    }
+
+    function handleResetOwnerPassword(e) {
+      e.preventDefault();
+      const enteredMobile = document.getElementById('fpMobile').value.replace(/\s+/g, '').replace(/^\+91/, '');
+      if (enteredMobile !== OWNER_CONTACT_RAW) { showToast('Enter Owner Mobile Number: 60009 11910', 'error'); return; }
+      db.adminPassword = document.getElementById('fpNewPass').value;
+      saveDatabase();
+      closeModal('forgotPassModal');
+      showToast('Admin password reset! Login now.', 'success');
+    }
+
+    function requestLogout() {
+      showConfirmDialog('Logout from Account?', 'Are you sure you want to logout?', () => {
+        saveSession(null);
+        showToast('Logged out successfully.', 'info');
+        renderAppShell();
+      });
+    }
+
+    function renderCustomerPortal(customer) {
+      const ledger = getCustomerLedger(customer.id);
+      document.getElementById('custHeaderAvatar').innerHTML = renderAvatarMarkup(customer, 'w-14 h-14');
+      document.getElementById('custHeaderName').textContent = customer.name;
+      document.getElementById('custHeaderShop').textContent = `${customer.shopName} • ${customer.mobile}`;
+      document.getElementById('custHeaderDue').textContent = formatRupees(ledger.balanceDue);
+      const kycBadge = document.getElementById('custHeaderKycBadge');
+      kycBadge.className = customer.kycVerified ? 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200' : 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200';
+      kycBadge.textContent = customer.kycVerified ? '✓ KYC Verified' : 'KYC Pending';
+      const ordDateEl = document.getElementById('ordDate');
+      if (!ordDateEl.value) ordDateEl.value = getLocalDateString(1);
+      ordDateEl.min = getLocalDateString(0);
+      updateOrderEstimate();
+      renderCustomerOrders(customer.id);
+      renderCustomerLedger(customer.id);
+      renderCustomerInjuredReports(customer.id);
+      populateCustomerProfileForm(customer);
+    }
+
+    function switchCustomerTab(tabKey) {
+      document.querySelectorAll('.cust-tab').forEach(btn => { btn.className = 'cust-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer'; });
+      const activeBtn = document.getElementById(`cTab-${tabKey}`);
+      if (activeBtn) activeBtn.className = 'cust-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-emerald-700 text-white shadow-sm transition cursor-pointer';
+      document.querySelectorAll('.cust-panel').forEach(p => p.classList.add('hidden'));
+      const activePanel = document.getElementById(`cPanel-${tabKey}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+    }
+
+    function updateOrderEstimate() {
+      document.getElementById('ordEstimateAmt').textContent = formatRupees(calcBillAmount(document.getElementById('ordKg').value, document.getElementById('ordGram').value, db.broilerRate));
+    }
+
+    async function toggleVoiceOrder() {
+      const btn = document.getElementById('voiceOrderBtn');
+      const btnText = document.getElementById('voiceOrderBtnText');
+      if (isRecordingVoice) { stopVoiceOrder(); return; }
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition && navigator.onLine) {
+        try {
+          speechRecognition = new SpeechRecognition();
+          speechRecognition.lang = 'en-IN';
+          isRecordingVoice = true;
+          btn.classList.add('bg-rose-600', 'recording-pulse');
+          btn.classList.remove('bg-slate-900');
+          btnText.textContent = 'Listening... Stop';
+          speechRecognition.onresult = (ev) => {
+            const noteEl = document.getElementById('ordNote');
+            noteEl.value = noteEl.value ? `${noteEl.value} ${ev.results[0][0].transcript}` : ev.results[0][0].transcript;
+            showToast('Voice order added!', 'success');
+          };
+          speechRecognition.onerror = () => { stopVoiceOrder(); startFallbackAudioRecorder(); };
+          speechRecognition.onend = () => stopVoiceOrder();
+          speechRecognition.start();
+          return;
+        } catch (err) {}
+      }
+      startFallbackAudioRecorder();
+    }
+
+    async function startFallbackAudioRecorder() {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined') {
+        showToast('Please type your order note.', 'info'); return;
+      }
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const chunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+        isRecordingVoice = true;
+        document.getElementById('voiceOrderBtn').classList.add('bg-rose-600', 'recording-pulse');
+        document.getElementById('voiceOrderBtnText').textContent = 'Recording... Stop';
+        mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          stream.getTracks().forEach(t => t.stop());
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            pendingVoiceAudioDataUrl = reader.result;
+            document.getElementById('voiceAudioPreview').src = pendingVoiceAudioDataUrl;
+            document.getElementById('voiceAudioPreviewWrap').classList.remove('hidden');
+            document.getElementById('voiceAudioPreviewWrap').classList.add('flex');
+          };
+          reader.readAsDataURL(new Blob(chunks, { type: 'audio/webm' }));
+        };
+        mediaRecorder.start();
+      } catch (err) { stopVoiceOrder(); }
+    }
+
+    function stopVoiceOrder() {
+      isRecordingVoice = false;
+      document.getElementById('voiceOrderBtn').classList.remove('bg-rose-600', 'recording-pulse');
+      document.getElementById('voiceOrderBtn').classList.add('bg-slate-900');
+      document.getElementById('voiceOrderBtnText').textContent = 'Voice Order (Speak)';
+      if (speechRecognition) { try { speechRecognition.stop(); } catch (e) {} speechRecognition = null; }
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') { try { mediaRecorder.stop(); } catch (e) {} mediaRecorder = null; }
+    }
+
+    function clearVoiceAudio() {
+      pendingVoiceAudioDataUrl = null;
+      document.getElementById('voiceAudioPreviewWrap').classList.add('hidden');
+      document.getElementById('voiceAudioPreview').src = '';
+    }
+
+    function handlePlaceOrder(e) {
+      e.preventDefault();
+      if (!session || session.role !== 'customer') return;
+      const deliveryDate = document.getElementById('ordDate').value;
+      const kg = parseInt(document.getElementById('ordKg').value, 10) || 0;
+      const gram = parseInt(document.getElementById('ordGram').value, 10) || 0;
+      const pieces = parseInt(document.getElementById('ordPieces').value, 10) || 0;
+      const note = document.getElementById('ordNote').value.trim();
+      if (kg === 0 && gram === 0 && pieces === 0 && !note && !pendingVoiceAudioDataUrl) { showToast('Enter weight, pieces, or note.', 'error'); return; }
+      db.orders.unshift({ id: generateId('ord'), customerId: session.customerId, deliveryDate, kg, gram, pieces, rateApplied: db.broilerRate, billAmount: calcBillAmount(kg, gram, db.broilerRate), status: 'Pending', note, voiceAudio: pendingVoiceAudioDataUrl || '', createdAt: getLocalDateString(0) });
+      saveDatabase();
+      document.getElementById('ordKg').value = 0; document.getElementById('ordGram').value = 0; document.getElementById('ordPieces').value = 0; document.getElementById('ordNote').value = '';
+      clearVoiceAudio(); updateOrderEstimate();
+      showToast('Order placed successfully!', 'success');
+      renderCustomerOrders(session.customerId);
+      switchCustomerTab('myOrders');
+    }
+
+    function renderOrderStatusBadge(status) {
+      if (status === 'Delivered') return `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">Delivered</span>`;
+      if (status === 'Confirmed') return `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 border border-blue-200">Confirmed</span>`;
+      return `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">Pending</span>`;
+    }
+
+    function renderCustomerOrders(customerId) {
+      const list = document.getElementById('custOrdersList');
+      const myOrders = db.orders.filter(o => o.customerId === customerId).sort((a, b) => (b.deliveryDate || '').localeCompare(a.deliveryDate || ''));
+      if (!myOrders.length) { list.innerHTML = `<div class="text-center py-8 text-sm text-slate-500">No orders placed yet.</div>`; return; }
+      list.innerHTML = myOrders.map(o => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2 flex-wrap"><span class="text-sm font-extrabold text-slate-900">Delivery: ${formatShortDate(o.deliveryDate)}</span>${renderOrderStatusBadge(o.status)}</div>
+            <p class="text-xs sm:text-sm font-semibold text-emerald-800">${formatWeight(toTotalGrams(o.kg, o.gram))} ${o.pieces ? `• ${o.pieces} Pieces` : ''}</p>
+            ${o.note ? `<p class="text-xs text-slate-600">Note: ${escapeHtml(o.note)}</p>` : ''}
+            ${o.voiceAudio ? `<audio controls src="${o.voiceAudio}" class="h-8 mt-1 max-w-xs"></audio>` : ''}
+          </div>
+          <div class="sm:text-right"><p class="text-xs text-slate-500">Bill (₹${o.rateApplied}/Kg)</p><p class="text-base font-extrabold text-slate-900">${formatRupees(o.billAmount)}</p></div>
+        </div>`).join('');
+    }
+
+    function renderCustomerLedger(customerId) {
+      const ledger = getCustomerLedger(customerId);
+      document.getElementById('custLedgerBilled').textContent = formatRupees(ledger.totalBilled);
+      document.getElementById('custLedgerPaid').textContent = formatRupees(ledger.totalPaid);
+      document.getElementById('custLedgerDue').textContent = formatRupees(ledger.balanceDue);
+      const list = document.getElementById('custReceiptsList');
+      const myReceipts = db.receipts.filter(r => r.customerId === customerId);
+      if (!myReceipts.length) { list.innerHTML = `<div class="text-center py-8 text-sm text-slate-500">No payment receipts issued yet.</div>`; return; }
+      list.innerHTML = myReceipts.map(r => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-2"><span class="text-sm font-extrabold text-slate-900">${escapeHtml(r.receiptNo)}</span><span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-emerald-100 text-emerald-800">PAID • ${escapeHtml(r.mode)}</span></div>
+            <p class="text-xs text-slate-500 mt-0.5">${escapeHtml(r.dateTime)}</p>
+            <p class="text-xs font-semibold text-slate-700 mt-1">Paid: <strong class="text-emerald-700">${formatRupees(r.amountPaid)}</strong> | Due: <strong class="text-rose-600">${formatRupees(r.remainingDue)}</strong></p>
+          </div>
+          <button onclick="openReceiptModal('${r.id}')" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold cursor-pointer shrink-0">View / Download PNG</button>
+        </div>`).join('');
+    }
+
+    async function handleInjuredReport(e) {
+      e.preventDefault();
+      const photo = await compressImageFile(document.getElementById('injPhotoInput').files[0], 480, 0.72);
+      if (!photo) { showToast('Please select a photo.', 'error'); return; }
+      db.injuredReports.unshift({ id: generateId('inj'), customerId: session.customerId, date: getLocalDateString(0), dateTime: formatDisplayDateTime(new Date()), pieces: parseInt(document.getElementById('injPieces').value, 10) || 1, kg: parseInt(document.getElementById('injKg').value, 10) || 0, gram: parseInt(document.getElementById('injGram').value, 10) || 0, note: document.getElementById('injNote').value.trim(), photo });
+      saveDatabase();
+      document.getElementById('injuredReportForm').reset();
+      document.getElementById('injPhotoPreview').classList.add('hidden');
+      showToast('Injured chicken report sent!', 'success');
+      renderCustomerInjuredReports(session.customerId);
+    }
+
+    function renderCustomerInjuredReports(customerId) {
+      const list = document.getElementById('custInjuredList');
+      const reports = db.injuredReports.filter(r => r.customerId === customerId);
+      if (!reports.length) { list.innerHTML = `<div class="text-center py-6 text-sm text-slate-500">No reports submitted.</div>`; return; }
+      list.innerHTML = reports.map(r => `<div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">${renderInjuredPhotoMarkup(r.photo)}<div class="min-w-0 flex-1"><p class="text-xs font-bold text-rose-700">${r.pieces} Pieces • ${formatWeight(toTotalGrams(r.kg, r.gram))}</p><p class="text-[11px] text-slate-500">${escapeHtml(r.dateTime)}</p>${r.note ? `<p class="text-xs text-slate-700 mt-1">${escapeHtml(r.note)}</p>` : ''}</div></div>`).join('');
+    }
+
+    function populateCustomerProfileForm(customer) {
+      document.getElementById('profName').value = customer.name || '';
+      document.getElementById('profFather').value = customer.fatherName || '';
+      document.getElementById('profShop').value = customer.shopName || '';
+      document.getElementById('profMobile').value = customer.mobile || '';
+      document.getElementById('profPhotoDisplay').innerHTML = renderAvatarMarkup(customer, 'w-20 h-20');
+      document.getElementById('profDocDisplay').innerHTML = renderDocPreviewMarkup(customer.kycDoc);
+      const pill = document.getElementById('profKycStatusPill');
+      pill.className = customer.kycVerified ? 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200' : 'px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200';
+      pill.textContent = customer.kycVerified ? '✓ Verified by Owner' : 'Pending Owner Verification';
+    }
+
+    async function handleUpdateCustomerProfile(e) {
+      e.preventDefault();
+      const customer = db.customers.find(c => c.id === session.customerId);
+      if (!customer) return;
+      customer.name = document.getElementById('profName').value.trim();
+      customer.fatherName = document.getElementById('profFather').value.trim();
+      customer.shopName = document.getElementById('profShop').value.trim();
+      customer.mobile = document.getElementById('profMobile').value.replace(/\s+/g, '');
+      if (document.getElementById('profPhotoInput').files[0]) customer.photo = await compressImageFile(document.getElementById('profPhotoInput').files[0], 320, 0.72);
+      if (document.getElementById('profDocInput').files[0]) customer.kycDoc = await compressImageFile(document.getElementById('profDocInput').files[0], 540, 0.72);
+      saveDatabase();
+      showToast('Profile updated!', 'success');
+      renderCustomerPortal(customer);
+    }
+    function renderOwnerDashboard() {
+      document.getElementById('ownerRateInput').value = db.broilerRate;
+      const todayStr = getLocalDateString(0);
+      if (!document.getElementById('salesListDateFilter').value) document.getElementById('salesListDateFilter').value = todayStr;
+      if (!document.getElementById('wlDate').value) document.getElementById('wlDate').value = todayStr;
+      renderOwnerKPIs();
+      renderOwnerSalesList();
+      renderOwnerOrders();
+      renderOwnerCustomers();
+      populateReceiptCustomerSelect();
+      renderOwnerReceiptsHistory();
+      renderWeightLossHistory();
+    }
+
+    function switchOwnerTab(tabKey) {
+      document.querySelectorAll('.owner-tab').forEach(btn => { btn.className = 'owner-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition cursor-pointer'; });
+      const activeBtn = document.getElementById(`oTab-${tabKey}`);
+      if (activeBtn) activeBtn.className = 'owner-tab px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap bg-emerald-700 text-white shadow-sm transition cursor-pointer';
+      document.querySelectorAll('.owner-panel').forEach(p => p.classList.add('hidden'));
+      const activePanel = document.getElementById(`oPanel-${tabKey}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+      if (tabKey === 'receipt') populateReceiptCustomerSelect();
+    }
+
+    function handleUpdateRate(e) {
+      e.preventDefault();
+      const newRate = parseInt(document.getElementById('ownerRateInput').value, 10);
+      if (!newRate || newRate <= 0) return;
+      db.broilerRate = newRate;
+      db.rateUpdatedAt = formatDisplayDateTime(new Date());
+      saveDatabase();
+      updateLiveHeader();
+      showToast(`Today Broiler Rate updated to ₹${newRate} / Kg!`, 'success');
+    }
+
+    function renderOwnerKPIs() {
+      const s = getTodaySummary(getLocalDateString(0));
+      const marketDue = getTotalMarketBalanceDue();
+      const wText = formatWeight(s.totalGrams);
+      document.getElementById('kpiSoldWeight').textContent = wText;
+      document.getElementById('kpiSoldPieces').textContent = `${s.totalPieces} Pieces`;
+      document.getElementById('kpiCollectedToday').textContent = formatRupees(s.totalCollected);
+      document.getElementById('kpiCollectedSplit').textContent = `Cash: ${formatRupees(s.cashCollected)} | UPI/Bank: ${formatRupees(s.digitalCollected)}`;
+      document.getElementById('kpiMarketDue').textContent = formatRupees(marketDue);
+      document.getElementById('barSoldToday').textContent = `${wText} (${s.totalPieces} Pcs)`;
+      document.getElementById('barCollectedToday').textContent = formatRupees(s.totalCollected);
+      document.getElementById('barMarketDue').textContent = formatRupees(marketDue);
+    }
+
+    function renderOwnerSalesList() {
+      const selectedDate = document.getElementById('salesListDateFilter').value || getLocalDateString(0);
+      const summary = getTodaySummary(selectedDate);
+      const body = document.getElementById('ownerSalesListBody');
+      if (!summary.deliveredToday.length) {
+        body.innerHTML = `<div class="p-6 text-center text-sm text-slate-500">No delivered sales recorded for ${formatShortDate(selectedDate)}.</div>`;
+      } else {
+        const grouped = {};
+        summary.deliveredToday.forEach(o => {
+          if (!grouped[o.customerId]) grouped[o.customerId] = { grams: 0, pieces: 0, amount: 0 };
+          grouped[o.customerId].grams += toTotalGrams(o.kg, o.gram);
+          grouped[o.customerId].pieces += parseInt(o.pieces, 10) || 0;
+          grouped[o.customerId].amount += Number(o.billAmount) || 0;
+        });
+        body.innerHTML = Object.keys(grouped).map(custId => {
+          const cust = db.customers.find(c => c.id === custId) || { name: 'Walk-in Customer', shopName: '' };
+          const row = grouped[custId];
+          return `<div onclick="openCustomerDetailModal('${custId}')" class="px-4 sm:px-5 py-3.5 flex items-center justify-between gap-3 hover:bg-emerald-50/50 transition cursor-pointer"><div class="min-w-0"><p class="text-sm sm:text-base font-extrabold text-slate-900 truncate">${escapeHtml(cust.name)}</p><p class="text-xs text-slate-500 truncate">${escapeHtml(cust.shopName)}</p></div><div class="text-right shrink-0"><p class="text-sm sm:text-base font-extrabold text-emerald-800">${formatWeight(row.grams)}</p><p class="text-xs font-semibold text-slate-500">${row.pieces} Pcs • ${formatRupees(row.amount)}</p></div></div>`;
+        }).join('');
+      }
+      document.getElementById('salesFooterTotalKg').textContent = formatWeight(summary.totalGrams);
+      document.getElementById('salesFooterWeightLoss').textContent = formatWeight(summary.totalLossGrams);
+    }
+
+    function openQuickSaleModal() {
+      document.getElementById('qsCustomer').innerHTML = db.customers.map(c => `<option value="${c.id}">${escapeHtml(c.name)} — ${escapeHtml(c.shopName)}</option>`).join('');
+      document.getElementById('qsDate').value = document.getElementById('salesListDateFilter').value || getLocalDateString(0);
+      document.getElementById('qsKg').value = 0; document.getElementById('qsGram').value = 0; document.getElementById('qsPieces').value = 0;
+      openModal('quickSaleModal');
+    }
+
+    function handleAddDirectSale(e) {
+      e.preventDefault();
+      const customerId = document.getElementById('qsCustomer').value;
+      const kg = parseInt(document.getElementById('qsKg').value, 10) || 0;
+      const gram = parseInt(document.getElementById('qsGram').value, 10) || 0;
+      const pieces = parseInt(document.getElementById('qsPieces').value, 10) || 0;
+      const deliveryDate = document.getElementById('qsDate').value;
+      if (kg === 0 && gram === 0) { showToast('Enter weight.', 'error'); return; }
+      db.orders.unshift({ id: generateId('ord'), customerId, deliveryDate, kg, gram, pieces, rateApplied: db.broilerRate, billAmount: calcBillAmount(kg, gram, db.broilerRate), status: 'Delivered', note: 'Direct sale added by Owner', voiceAudio: '', createdAt: getLocalDateString(0) });
+      saveDatabase();
+      closeModal('quickSaleModal');
+      showToast('Direct sale saved!', 'success');
+      renderOwnerDashboard();
+    }
+
+    function setOrderDateFilter(preset) {
+      const input = document.getElementById('ownerOrderDateFilter');
+      input.value = preset === 'today' ? getLocalDateString(0) : preset === 'tomorrow' ? getLocalDateString(1) : '';
+      renderOwnerOrders();
+    }
+
+    function renderOwnerOrders() {
+      const filterDate = document.getElementById('ownerOrderDateFilter').value;
+      const container = document.getElementById('ownerOrdersContainer');
+      let filtered = filterDate ? db.orders.filter(o => o.deliveryDate === filterDate) : [...db.orders];
+      filtered.sort((a, b) => (b.deliveryDate || '').localeCompare(a.deliveryDate || ''));
+      if (!filtered.length) { container.innerHTML = `<div class="text-center py-8 text-sm text-slate-500">No orders found.</div>`; return; }
+      container.innerHTML = filtered.map(o => {
+        const cust = db.customers.find(c => c.id === o.customerId) || { name: 'Unknown', shopName: '' };
+        return `<div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-3"><div class="flex flex-wrap items-start justify-between gap-2"><div><div class="flex items-center gap-2 flex-wrap"><h4 class="text-sm sm:text-base font-extrabold text-slate-900">${escapeHtml(cust.name)}</h4>${renderOrderStatusBadge(o.status)}</div><p class="text-xs text-slate-500">${escapeHtml(cust.shopName)} • Delivery: <strong>${formatShortDate(o.deliveryDate)}</strong></p>${o.note ? `<p class="text-xs text-slate-700 mt-1 bg-white px-2.5 py-1.5 rounded-lg border border-slate-200">Note: ${escapeHtml(o.note)}</p>` : ''}${o.voiceAudio ? `<audio controls src="${o.voiceAudio}" class="h-8 mt-1.5 max-w-xs"></audio>` : ''}</div><div class="text-right"><p class="text-xs text-slate-500">Bill</p><p class="text-base font-extrabold text-emerald-800">${formatRupees(o.billAmount)}</p></div></div><div class="grid grid-cols-2 sm:grid-cols-6 gap-2 pt-2 border-t border-slate-200 items-end"><div><label class="block text-[10px] font-bold text-slate-500 uppercase">Final Kg</label><input id="editKg_${o.id}" type="number" min="0" value="${o.kg}" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-xs font-bold" /></div><div><label class="block text-[10px] font-bold text-slate-500 uppercase">Final Gram</label><input id="editGram_${o.id}" type="number" min="0" max="999" value="${o.gram}" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-xs font-bold" /></div><div><label class="block text-[10px] font-bold text-slate-500 uppercase">Pieces</label><input id="editPcs_${o.id}" type="number" min="0" value="${o.pieces}" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-xs font-bold" /></div><div><label class="block text-[10px] font-bold text-slate-500 uppercase">Status</label><select id="editStatus_${o.id}" class="w-full px-2 py-1.5 rounded-lg border border-slate-300 bg-white text-xs font-bold"><option value="Pending" ${o.status==='Pending'?'selected':''}>Pending</option><option value="Confirmed" ${o.status==='Confirmed'?'selected':''}>Confirmed</option><option value="Delivered" ${o.status==='Delivered'?'selected':''}>Delivered</option></select></div><div class="col-span-2"><button onclick="saveOrderUpdate('${o.id}')" class="w-full py-2 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold cursor-pointer">Save Weight & Status</button></div></div></div>`;
+      }).join('');
+    }
+
+    function saveOrderUpdate(orderId) {
+      const order = db.orders.find(o => o.id === orderId);
+      if (!order) return;
+      order.kg = parseInt(document.getElementById(`editKg_${orderId}`).value, 10) || 0;
+      order.gram = parseInt(document.getElementById(`editGram_${orderId}`).value, 10) || 0;
+      order.pieces = parseInt(document.getElementById(`editPcs_${orderId}`).value, 10) || 0;
+      order.status = document.getElementById(`editStatus_${orderId}`).value;
+      order.rateApplied = db.broilerRate;
+      order.billAmount = calcBillAmount(order.kg, order.gram, order.rateApplied);
+      saveDatabase();
+      showToast(`Order updated (${order.status})`, 'success');
+      renderOwnerDashboard();
+    }
+
+    function renderOwnerCustomers() {
+      const q = (document.getElementById('ownerCustomerSearch').value || '').toLowerCase().trim();
+      const grid = document.getElementById('ownerCustomersGrid');
+      const filtered = db.customers.filter(c => c.name.toLowerCase().includes(q) || c.shopName.toLowerCase().includes(q) || c.mobile.includes(q));
+      grid.innerHTML = filtered.map(c => {
+        const due = getCustomerLedger(c.id).balanceDue;
+        return `<div onclick="openCustomerDetailModal('${c.id}')" class="p-4 rounded-2xl border border-slate-200 hover:border-emerald-500 bg-white transition cursor-pointer flex items-center justify-between gap-3"><div class="flex items-center gap-3 min-w-0">${renderAvatarMarkup(c, 'w-12 h-12 shrink-0')}<div class="min-w-0"><div class="flex items-center gap-1.5 flex-wrap"><p class="text-sm font-extrabold text-slate-900 truncate">${escapeHtml(c.name)}</p><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${c.kycVerified?'bg-emerald-100 text-emerald-800':'bg-amber-100 text-amber-800'}">${c.kycVerified?'Verified':'KYC Pending'}</span></div><p class="text-xs text-slate-500 truncate">${escapeHtml(c.shopName)}</p><p class="text-[11px] font-semibold text-slate-600">${escapeHtml(c.mobile)}</p></div></div><div class="text-right shrink-0"><p class="text-[10px] font-bold text-slate-400 uppercase">Due</p><p class="text-sm font-extrabold ${due>0?'text-rose-600':'text-emerald-700'}">${formatRupees(due)}</p></div></div>`;
+      }).join('');
+    }
+
+    function openCustomerDetailModal(customerId) {
+      const cust = db.customers.find(c => c.id === customerId);
+      if (!cust) return;
+      const ledger = getCustomerLedger(customerId);
+      const orders = db.orders.filter(o => o.customerId === customerId);
+      const receipts = db.receipts.filter(r => r.customerId === customerId);
+      const reports = db.injuredReports.filter(r => r.customerId === customerId);
+      document.getElementById('customerDetailBody').innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center gap-3.5">${renderAvatarMarkup(cust, 'w-16 h-16 shrink-0')}<div><h4 class="text-lg font-extrabold text-slate-900">${escapeHtml(cust.name)}</h4><p class="text-xs text-slate-600">Father's Name: <strong>${escapeHtml(cust.fatherName)}</strong></p><p class="text-xs text-slate-600">${escapeHtml(cust.shopName)}</p><p class="text-xs font-bold text-emerald-800">Mobile: ${escapeHtml(cust.mobile)}</p></div></div>
+          <div>${cust.kycVerified ? `<span class="px-3 py-1.5 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200">✓ KYC Verified</span>` : `<button onclick="approveCustomerKYC('${cust.id}')" class="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold cursor-pointer">Approve / Verify KYC</button>`}</div>
+        </div>
+        <div class="grid grid-cols-3 gap-2.5 text-center">
+          <div class="p-3 rounded-xl bg-white border border-slate-200"><p class="text-[11px] font-bold text-slate-500">Total Billed</p><p class="text-base font-extrabold">${formatRupees(ledger.totalBilled)}</p></div>
+          <div class="p-3 rounded-xl bg-white border border-slate-200"><p class="text-[11px] font-bold text-slate-500">Total Paid</p><p class="text-base font-extrabold text-emerald-700">${formatRupees(ledger.totalPaid)}</p></div>
+          <div class="p-3 rounded-xl bg-white border border-slate-200"><p class="text-[11px] font-bold text-slate-500">Balance Due</p><p class="text-base font-extrabold text-rose-600">${formatRupees(ledger.balanceDue)}</p></div>
+        </div>
+        <div><h5 class="text-sm font-extrabold mb-2">KYC Document</h5><div class="w-full h-44 rounded-xl border border-slate-200 overflow-hidden bg-slate-50 flex items-center justify-center">${renderDocPreviewMarkup(cust.kycDoc)}</div></div>
+        <div><h5 class="text-sm font-extrabold mb-2">Order History (${orders.length})</h5><div class="space-y-2 max-h-48 overflow-y-auto">${orders.map(o => `<div class="p-3 rounded-xl border border-slate-200 flex justify-between text-xs"><div><strong>${formatShortDate(o.deliveryDate)}</strong> ${renderOrderStatusBadge(o.status)}<p class="text-slate-600 mt-0.5">${formatWeight(toTotalGrams(o.kg, o.gram))} • ${o.pieces} Pcs</p></div><strong class="text-sm">${formatRupees(o.billAmount)}</strong></div>`).join('') || '<p class="text-xs text-slate-500">No orders.</p>'}</div></div>
+        <div><h5 class="text-sm font-extrabold mb-2">Payments (${receipts.length})</h5><div class="space-y-2 max-h-44 overflow-y-auto">${receipts.map(r => `<div class="p-3 rounded-xl border border-slate-200 flex justify-between items-center text-xs"><div><strong>${escapeHtml(r.receiptNo)}</strong> (${escapeHtml(r.mode)})<p class="text-slate-500">${escapeHtml(r.dateTime)}</p></div><div class="flex items-center gap-2"><strong class="text-emerald-700">${formatRupees(r.amountPaid)}</strong><button onclick="openReceiptModal('${r.id}')" class="px-2.5 py-1 rounded-lg bg-slate-900 text-white font-bold cursor-pointer">PNG</button></div></div>`).join('') || '<p class="text-xs text-slate-500">No payments.</p>'}</div></div>
+        <div><h5 class="text-sm font-extrabold mb-2">Injured Reports (${reports.length})</h5><div class="space-y-2">${reports.map(r => `<div class="p-3 rounded-xl border border-rose-200 bg-rose-50/40 flex gap-3">${renderInjuredPhotoMarkup(r.photo)}<div class="text-xs"><p class="font-bold text-rose-700">${r.pieces} Pcs • ${formatWeight(toTotalGrams(r.kg, r.gram))}</p><p class="text-slate-500">${escapeHtml(r.dateTime)}</p><p class="text-slate-700 mt-1">${escapeHtml(r.note || '')}</p></div></div>`).join('') || '<p class="text-xs text-slate-500">No reports.</p>'}</div></div>`;
+      openModal('customerDetailModal');
+    }
+
+    function approveCustomerKYC(customerId) {
+      const cust = db.customers.find(c => c.id === customerId);
+      if (!cust) return;
+      cust.kycVerified = true;
+      saveDatabase();
+      showToast(`KYC verified for ${cust.name}!`, 'success');
+      openCustomerDetailModal(customerId);
+      renderOwnerCustomers();
+    }
+
+    function populateReceiptCustomerSelect() {
+      const sel = document.getElementById('recCustomerSelect');
+      const prev = sel.value;
+      sel.innerHTML = db.customers.map(c => `<option value="${c.id}">${escapeHtml(c.name)} — Due: ${formatRupees(getCustomerLedger(c.id).balanceDue)}</option>`).join('');
+      if (prev && db.customers.some(c => c.id === prev)) sel.value = prev;
+      updateReceiptPreviewCalc();
+    }
+
+    function buildReceiptCardHTML(receipt, customer) {
+      return `<div class="bg-white"><div class="bg-emerald-800 text-white px-5 py-4 flex items-center justify-between"><div><h4 class="text-lg font-extrabold">ARIYAN CHICKEN</h4><p class="text-xs text-emerald-200 font-semibold">Contact: ${OWNER_CONTACT_DISPLAY}</p></div><span class="px-3 py-1 rounded-full bg-emerald-400 text-emerald-950 text-xs font-extrabold uppercase">PAID</span></div><div class="p-5 space-y-3 text-sm"><div class="flex justify-between text-xs text-slate-500 border-b pb-2"><span>Receipt: <strong class="text-slate-900">${escapeHtml(receipt.receiptNo)}</strong></span><span>${escapeHtml(receipt.dateTime)}</span></div><div><p class="text-base font-extrabold text-slate-900">${escapeHtml(customer.name)}</p><p class="text-xs text-slate-600">Father's Name: <strong>${escapeHtml(customer.fatherName)}</strong></p><p class="text-xs text-slate-600">Shop: ${escapeHtml(customer.shopName)}</p></div><div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs sm:text-sm"><div class="flex justify-between"><span>Payment Mode</span><strong>${escapeHtml(receipt.mode)}</strong></div><div class="flex justify-between"><span>Previous Due</span><strong>${formatRupees(receipt.previousDue)}</strong></div><div class="flex justify-between text-base pt-1 border-t"><span class="font-bold text-emerald-800">Paid Amount</span><strong class="text-emerald-700 font-extrabold">${formatRupees(receipt.amountPaid)}</strong></div><div class="flex justify-between"><span class="font-semibold">Remaining Due</span><strong class="text-rose-600 font-extrabold">${formatRupees(receipt.remainingDue)}</strong></div></div></div></div>`;
+    }
+
+    function updateReceiptPreviewCalc() {
+      const cust = db.customers.find(c => c.id === document.getElementById('recCustomerSelect').value);
+      if (!cust) return;
+      const prevDue = getCustomerLedger(cust.id).balanceDue;
+      const paidNow = Math.max(0, parseInt(document.getElementById('recAmountInput').value, 10) || 0);
+      const remDue = Math.max(0, prevDue - paidNow);
+      document.getElementById('recCalcPrevDue').textContent = formatRupees(prevDue);
+      document.getElementById('recCalcPaidNow').textContent = formatRupees(paidNow);
+      document.getElementById('recCalcRemDue').textContent = formatRupees(remDue);
+      document.getElementById('liveReceiptCard').innerHTML = buildReceiptCardHTML({ receiptNo: `AC-${db.receiptCounter}`, dateTime: formatDisplayDateTime(new Date()), mode: document.getElementById('recModeSelect').value, previousDue: prevDue, amountPaid: paidNow, remainingDue: remDue }, cust);
+    }
+
+    function handleCreateReceipt(e) {
+      e.preventDefault();
+      const cust = db.customers.find(c => c.id === document.getElementById('recCustomerSelect').value);
+      const amountPaid = parseInt(document.getElementById('recAmountInput').value, 10) || 0;
+      if (!cust || amountPaid <= 0) return;
+      const previousDue = getCustomerLedger(cust.id).balanceDue;
+      const newReceipt = { id: generateId('rec'), receiptNo: `AC-${db.receiptCounter++}`, customerId: cust.id, date: getLocalDateString(0), dateTime: formatDisplayDateTime(new Date()), mode: document.getElementById('recModeSelect').value, previousDue, amountPaid, remainingDue: Math.max(0, previousDue - amountPaid) };
+      db.receipts.unshift(newReceipt);
+      saveDatabase();
+      latestCreatedReceipt = newReceipt;
+      document.getElementById('recAmountInput').value = '';
+      document.getElementById('latestReceiptActions').classList.remove('hidden');
+      showToast(`Receipt ${newReceipt.receiptNo} saved!`, 'success');
+      renderOwnerKPIs(); renderOwnerReceiptsHistory(); renderOwnerCustomers(); populateReceiptCustomerSelect();
+      document.getElementById('liveReceiptCard').innerHTML = buildReceiptCardHTML(newReceipt, cust);
+    }
+
+    function renderOwnerReceiptsHistory() {
+      document.getElementById('ownerReceiptsHistory').innerHTML = db.receipts.slice(0, 20).map(r => {
+        const cust = db.customers.find(c => c.id === r.customerId) || { name: 'Unknown' };
+        return `<div class="p-3.5 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-2"><div><span class="text-sm font-extrabold">${escapeHtml(r.receiptNo)}</span> <span class="text-xs font-bold text-slate-600">${escapeHtml(cust.name)}</span><p class="text-xs text-slate-500">${escapeHtml(r.dateTime)} • ${escapeHtml(r.mode)}</p></div><div class="flex items-center gap-3"><div class="text-right"><p class="text-sm font-extrabold text-emerald-700">${formatRupees(r.amountPaid)}</p><p class="text-[11px] text-rose-600 font-semibold">Due: ${formatRupees(r.remainingDue)}</p></div><button onclick="openReceiptModal('${r.id}')" class="px-3 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold cursor-pointer">View PNG</button></div></div>`;
+      }).join('') || '<p class="text-sm text-slate-500">No receipts yet.</p>';
+    }
+
+    function openReceiptModal(receiptId) {
+      const r = db.receipts.find(x => x.id === receiptId);
+      if (!r) return;
+      const cust = db.customers.find(c => c.id === r.customerId) || { name: 'Customer', fatherName: '-', shopName: '-' };
+      activeReceiptForModal = r;
+      document.getElementById('receiptModalCard').innerHTML = `<div class="rounded-xl border-2 border-emerald-700 overflow-hidden">${buildReceiptCardHTML(r, cust)}</div>`;
+      openModal('receiptViewModal');
+    }
+
+    function downloadReceiptPNG(receipt) {
+      const cust = db.customers.find(c => c.id === receipt.customerId) || { name: 'Customer', fatherName: '-', shopName: '-' };
+      const canvas = document.getElementById('receiptCanvas');
+      canvas.width = 760; canvas.height = 900;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, 760, 900);
+      ctx.strokeStyle = '#065f46'; ctx.lineWidth = 10; ctx.strokeRect(18, 18, 724, 864);
+      ctx.fillStyle = '#065f46'; ctx.fillRect(23, 23, 714, 150);
+      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 42px Arial'; ctx.fillText('ARIYAN CHICKEN', 54, 92);
+      ctx.fillStyle = '#a7f3d0'; ctx.font = '600 22px Arial'; ctx.fillText('Contact: ' + OWNER_CONTACT_DISPLAY, 54, 134);
+      ctx.fillStyle = '#34d399'; ctx.fillRect(580, 62, 120, 54);
+      ctx.fillStyle = '#022c22'; ctx.font = 'bold 26px Arial'; ctx.fillText('PAID', 608, 98);
+      ctx.fillStyle = '#0f172a'; ctx.font = 'bold 24px Arial'; ctx.fillText('Receipt: ' + receipt.receiptNo + '   |   ' + receipt.dateTime, 54, 224);
+      ctx.font = 'bold 30px Arial'; ctx.fillText(cust.name, 54, 290);
+      ctx.font = '500 21px Arial'; ctx.fillStyle = '#334155';
+      ctx.fillText("Father's Name: " + cust.fatherName, 54, 330);
+      ctx.fillText('Shop: ' + cust.shopName.slice(0, 56), 54, 366);
+      ctx.fillStyle = '#f8fafc'; ctx.fillRect(54, 420, 652, 280);
+      ctx.fillStyle = '#0f172a'; ctx.font = 'bold 24px Arial';
+      ctx.fillText('Payment Mode: ' + receipt.mode, 80, 480);
+      ctx.fillText('Previous Due: ' + formatRupees(receipt.previousDue), 80, 535);
+      ctx.fillStyle = '#047857'; ctx.font = 'bold 28px Arial'; ctx.fillText('Paid Amount: ' + formatRupees(receipt.amountPaid), 80, 600);
+      ctx.fillStyle = '#e11d48'; ctx.fillText('Remaining Due: ' + formatRupees(receipt.remainingDue), 80, 660);
+      const link = document.createElement('a');
+      link.download = `ARIYAN_CHICKEN_${receipt.receiptNo}.png`;
+      link.href = canvas.toDataURL('image/png');
+      document.body.appendChild(link); link.click(); document.body.removeChild(link);
+      showToast('Receipt PNG downloaded!', 'success');
+    }
+
+    function shareReceiptWhatsApp(receipt) {
+      const cust = db.customers.find(c => c.id === receipt.customerId) || { name: 'Customer', fatherName: '-', shopName: '-', mobile: '' };
+      const text = `*ARIYAN CHICKEN — MONEY RECEIPT*\nContact: ${OWNER_CONTACT_DISPLAY}\nReceipt: ${receipt.receiptNo}\nDate: ${receipt.dateTime}\nCustomer: ${cust.name}\nPaid: *${formatRupees(receipt.amountPaid)}* (${receipt.mode})\nRemaining Due: ${formatRupees(receipt.remainingDue)}`;
+      const phone = cust.mobile ? `91${cust.mobile.replace(/\D/g, '').slice(-10)}` : '';
+      window.open(phone ? `https://wa.me/${phone}?text=${encodeURIComponent(text)}` : `https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function downloadCurrentReceiptPNG() { if (latestCreatedReceipt) downloadReceiptPNG(latestCreatedReceipt); }
+    function shareCurrentReceiptWhatsApp() { if (latestCreatedReceipt) shareReceiptWhatsApp(latestCreatedReceipt); }
+    function downloadModalReceiptPNG() { if (activeReceiptForModal) downloadReceiptPNG(activeReceiptForModal); }
+    function shareModalReceiptWhatsApp() { if (activeReceiptForModal) shareReceiptWhatsApp(activeReceiptForModal); }
+
+    function handleAddWeightLoss(e) {
+      e.preventDefault();
+      const kg = parseInt(document.getElementById('wlKg').value, 10) || 0;
+      const gram = parseInt(document.getElementById('wlGram').value, 10) || 0;
+      if (kg === 0 && gram === 0) return;
+      db.weightLosses.unshift({ id: generateId('wl'), date: document.getElementById('wlDate').value, kg, gram, note: document.getElementById('wlNote').value.trim() });
+      saveDatabase();
+      document.getElementById('wlKg').value = 0; document.getElementById('wlGram').value = 0; document.getElementById('wlNote').value = '';
+      showToast('Weight loss recorded!', 'success');
+      renderWeightLossHistory(); renderOwnerSalesList();
+    }
+
+    function deleteWeightLoss(id) {
+      db.weightLosses = db.weightLosses.filter(w => w.id !== id);
+      saveDatabase();
+      renderWeightLossHistory(); renderOwnerSalesList();
+    }
+
+    function renderWeightLossHistory() {
+      document.getElementById('weightLossHistoryList').innerHTML = db.weightLosses.map(w => `<div class="py-3 flex items-center justify-between gap-3"><div><p class="text-sm font-extrabold">${formatShortDate(w.date)} — <span class="text-amber-700">${formatWeight(toTotalGrams(w.kg, w.gram))}</span></p>${w.note ? `<p class="text-xs text-slate-500">${escapeHtml(w.note)}</p>` : ''}</div><button onclick="deleteWeightLoss('${w.id}')" class="px-3 py-1.5 rounded-lg bg-rose-50 text-rose-700 text-xs font-bold cursor-pointer">Delete</button></div>`).join('') || '<p class="py-6 text-center text-sm text-slate-500">No entries yet.</p>';
+    }
+
+    function handleChangeAdminPassword(e) {
+      e.preventDefault();
+      if (document.getElementById('admCurrPass').value !== db.adminPassword) { showToast('Current password incorrect.', 'error'); return; }
+      const next = document.getElementById('admNewPass').value;
+      if (next !== document.getElementById('admConfirmPass').value) { showToast('Passwords do not match.', 'error'); return; }
+      db.adminPassword = next;
+      saveDatabase();
+      document.getElementById('changeAdminPassForm').reset();
+      showToast('Admin password updated!', 'success');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadDatabase();
+      loadSession();
+      initOfflineSupport();
+      renderAppShell();
+      setInterval(() => { document.getElementById('liveDateTimeDisplay').textContent = formatDisplayDateTime(new Date()); }, 15000);
+    });
+  </script>
+
+  <!-- LIVE FIREBASE CLOUD SYNC -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyARANP1fHOHydpXXr4jrqOGC7Ejft3yVek",
+      authDomain: "ariyan-chicken.firebaseapp.com",
+      projectId: "ariyan-chicken",
+      storageBucket: "ariyan-chicken.firebasestorage.app",
+      messagingSenderId: "856725411114",
+      appId: "1:856725411114:web:86577c01d1731421c2ba53"
+    };
+
+    const appId = 'ariyan-chicken-live';
+    const COLLECTIONS = ['customers', 'orders', 'receipts', 'weightLosses', 'injuredReports'];
+    const syncedCache = { settings: {}, customers: {}, orders: {}, receipts: {}, weightLosses: {}, injuredReports: {} };
+    let fsDb = null, fbUser = null, initialLoadDone = false;
+
+    const cloudSync = {
+      isConnected: false,
+      pushChanges: async () => {
+        if (!cloudSync.isConnected || !fbUser || !fsDb || !db) return;
+        try {
+          const sp = { adminPassword: db.adminPassword || 'Ariyan@026', broilerRate: Number(db.broilerRate) || 148, rateUpdatedAt: db.rateUpdatedAt || '', receiptCounter: Number(db.receiptCounter) || 1004 };
+          if (syncedCache.settings.main !== JSON.stringify(sp)) {
+            syncedCache.settings.main = JSON.stringify(sp);
+            await setDoc(doc(fsDb, 'artifacts', appId, 'public', 'data', 'settings', 'main'), sp);
+          }
+          for (const colName of COLLECTIONS) {
+            const list = Array.isArray(db[colName]) ? db[colName] : [];
+            const ids = new Set();
+            for (const item of list) {
+              if (!item || !item.id) continue;
+              ids.add(item.id);
+              const s = JSON.stringify(item);
+              if (syncedCache[colName][item.id] !== s) {
+                syncedCache[colName][item.id] = s;
+                await setDoc(doc(fsDb, 'artifacts', appId, 'public', 'data', colName, item.id), item);
+              }
+            }
+            for (const cid of Object.keys(syncedCache[colName])) {
+              if (!ids.has(cid)) { delete syncedCache[colName][cid]; await deleteDoc(doc(fsDb, 'artifacts', appId, 'public', 'data', colName, cid)); }
+            }
+          }
+        } catch (err) {}
+      }
+    };
+    window.cloudSync = cloudSync;
+
+    window.addEventListener('load', async () => {
+      try {
+        const fbApp = initializeApp(firebaseConfig);
+        const fbAuth = getAuth(fbApp);
+        fsDb = getFirestore(fbApp);
+        await signInAnonymously(fbAuth);
+        fbUser = fbAuth.currentUser;
+        if (!fbUser) return;
+        cloudSync.isConnected = true;
+        updateNetworkBadge();
+
+        onSnapshot(collection(fsDb, 'artifacts', appId, 'public', 'data', 'settings'), (snap) => {
+          if (snap.empty) { if (!initialLoadDone) { initialLoadDone = true; cloudSync.pushChanges(); } return; }
+          initialLoadDone = true;
+          snap.forEach(d => {
+            if (d.id === 'main') {
+              const data = d.data();
+              syncedCache.settings.main = JSON.stringify(data);
+              if (data.adminPassword) db.adminPassword = data.adminPassword;
+              if (data.broilerRate) db.broilerRate = Number(data.broilerRate);
+              if (data.receiptCounter) db.receiptCounter = Number(data.receiptCounter);
+            }
+          });
+          try { localStorage.setItem(DB_KEY, JSON.stringify(db)); } catch (e) {}
+          handleLiveCloudRefresh();
+        });
+
+        COLLECTIONS.forEach(colName => {
+          onSnapshot(collection(fsDb, 'artifacts', appId, 'public', 'data', colName), (snap) => {
+            if (snap.empty && !initialLoadDone) return;
+            const items = [], nextCache = {};
+            snap.forEach(d => { items.push(d.data()); nextCache[d.id] = JSON.stringify(d.data()); });
+            syncedCache[colName] = nextCache;
+            db[colName] = items;
+            try { localStorage.setItem(DB_KEY, JSON.stringify(db)); } catch (e) {}
+            handleLiveCloudRefresh();
+          });
+        });
+      } catch (err) {
+        cloudSync.isConnected = false;
+        updateNetworkBadge();
+      }
+    });
+  </script>
+</body>
+</html>
