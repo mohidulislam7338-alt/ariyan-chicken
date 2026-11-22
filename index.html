@@ -1,1 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#065f46" />
+  <title>ARIYAN CHICKEN — Wholesale Broiler Management</title>
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Font: Inter (gracefully falls back to system fonts when offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Smooth scrolling and mobile tap highlights */
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    /* Hide scrollbar for horizontal tab bars */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Subtle pulse for voice recording */
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
+      70% { box-shadow: 0 0 0 12px rgba(220, 38, 38, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+    }
+    .recording-pulse {
+      animation: pulseRing 1.4s infinite;
+    }
+    /* Modal fade */
+    .fade-in {
+      animation: fadeIn 0.18s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased selection:bg-emerald-100 selection:text-emerald-900">
+
+  <!-- ===================================================================== -->
+  <!-- TOP HEADER & PUBLIC LIVE RATE BANNER (VISIBLE TO EVERYONE)            -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <!-- Top Brand & Connection Status Bar -->
+    <div class="bg-slate-900 text-white">
+      <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2">
+        <!-- Brand Identity -->
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shadow-inner shrink-0">
+            <!-- Inline SVG Brand Emblem -->
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight leading-tight text-white">ARIYAN CHICKEN</h1>
+            <p class="text-[11px] sm:text-xs text-emerald-300 font-medium">Wholesale Broiler Supplier</p>
+          </div>
+        </div>
+
+        <!-- Right Controls: Online/Offline Badge + Active Session Pill -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <!-- Live Connection Status Badge -->
+          <div id="networkStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-900/80 text-emerald-200 border border-emerald-700/70">
+            <span id="networkStatusDot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span id="networkStatusText">Online</span>
+          </div>
+
+          <!-- Logged-In User Badge & Logout -->
+          <div id="headerUserControls" class="hidden items-center gap-2">
+            <span id="headerUserLabel" class="hidden sm:inline-block text-xs font-medium text-slate-200 bg-slate-800 px-2.5 py-1 rounded-full border border-slate-700"></span>
+            <button onclick="requestLogout()" class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-semibold transition cursor-pointer">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Broiler Rate Banner -->
+    <div class="bg-emerald-800 text-white">
+      <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-300 animate-pulse"></span>
+          <span class="text-base sm:text-lg font-extrabold tracking-tight">
+            Today Broiler Rate: ₹<span id="publicRateValue">148</span> / Kg
+          </span>
+        </div>
+        <div class="text-xs sm:text-sm font-medium text-emerald-100 flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-300 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span id="liveDateTimeDisplay">-- --- ---- | --:-- --</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Bar -->
+    <div class="bg-white border-t border-slate-100">
+      <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2 text-sm text-slate-700 font-semibold">
+          <svg class="w-4 h-4 text-emerald-700 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span>Owner Contact: <strong class="text-slate-900">60009 11910</strong></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="tel:+916000911910" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold transition shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            Call Now
+          </a>
+          <a href="https://wa.me/916000911910" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold transition shadow-sm">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.453 1.344-2.016 1.422-.516.078-1.188.109-1.922-.125-.453-.141-1.031-.328-1.766-.641-3.109-1.344-5.125-4.484-5.281-4.688-.156-.203-1.266-1.688-1.266-3.219 0-1.531.797-2.281 1.078-2.594.281-.312.625-.391.828-.391.203 0 .406.016.594.016.188 0 .453-.078.703.531.266.625.891 2.172.969 2.328.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.312.828 1.359 1.781 2.203 1.219 1.094 2.25 1.438 2.562 1.594.312.156.5.125.688-.078.188-.203.781-.922.984-1.234.203-.312.406-.266.688-.156.281.109 1.797.844 2.109 1 .312.156.516.234.594.359.078.125.078.734-.172 1.438z"/>
+            </svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- MAIN APPLICATION CONTAINER                                            -->
+  <!-- ===================================================================== -->
+  <main class="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-6 py-5 pb-24">
+
+    <!-- =================================================================== -->
+    <!-- VIEW 1: PUBLIC LANDING & LOGIN / ONE-TIME SIGN UP                   -->
+    <!-- =================================================================== -->
+    <section id="viewLanding" class="space-y-6 fade-in">
+      <!-- Intro Banner -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200 mb-2">
+            Direct Wholesale Ordering & Digital Receipts
+          </span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Welcome to ARIYAN CHICKEN Portal</h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl">
+            Place next-morning orders before 10:00 PM, track your delivery status, view payment receipts, or manage daily wholesale operations. Works smoothly even when offline.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-2 shrink-0">
+          <button onclick="switchAuthTab('customer')" id="btnHeroCustomer" class="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-bold shadow-sm transition cursor-pointer">
+            Customer Portal
+          </button>
+          <button onclick="switchAuthTab('owner')" id="btnHeroOwner" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold shadow-sm transition cursor-pointer">
+            Owner Admin Login
+          </button>
+        </div>
+      </div>
+
+      <!-- Auth Tabs Card -->
+      <div class="max-w-xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <!-- Role Selector Tabs -->
+        <div class="grid grid-cols-2 border-b border-slate-200 bg-slate-50">
+          <button id="authTabCustomer" onclick="switchAuthTab('customer')" class="py-3.5 text-sm font-bold text-center border-b-2 border-emerald-700 text-emerald-800 bg-white transition cursor-pointer">
+            Customer Login / Sign Up
+          </button>
+          <button id="authTabOwner" onclick="switchAuthTab('owner')" class="py-3.5 text-sm font-bold text-center border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition cursor-pointer">
+            Owner Admin Login
+          </button>
+        </div>
+
+        <!-- CUSTOMER AUTH PANEL -->
+        <div id="customerAuthPanel" class="p-5 sm:p-6 space-y-5">
+          <!-- Sub-switch: Login vs One-Time Sign Up -->
+          <div class="flex p-1 bg-slate-100 rounded-xl">
+            <button id="custSubLoginBtn" onclick="switchCustomerAuthMode('login')" class="flex-1 py-2 text-sm font-bold rounded-lg bg-white text-slate-900 shadow-sm transition cursor-pointer">
+              Returning Customer Login
+            </button>
+            <button id="custSubSignupBtn" onclick="switchCustomerAuthMode('signup')" class="flex-1 py-2 text-sm font-bold rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">
+              One-Time Sign Up
+            </button>
+          </div>
+
+          <!-- Continue with Google Quick Option -->
+          <button type="button" onclick="openGoogleModal()" class="w-full py-3 px-4 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold text-sm flex items-center justify-center gap-2.5 shadow-sm transition cursor-pointer">
+            <svg class="w-5 h-5" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"/>
+              <path fill="#34A853" d="M12.255 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96h-3.98v3.09C3.515 21.3 7.565 24 12.255 24z"/>
+              <path fill="#FBBC05" d="M5.525 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62h-3.98a11.86 11.86 0 000 10.76l3.98-3.09z"/>
+              <path fill="#EA4335" d="M12.255 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C18.205 1.19 15.495 0 12.255 0c-4.69 0-8.74 2.7-10.71 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"/>
+            </svg>
+            Continue with Google
+          </button>
+
+          <div class="relative flex items-center">
+            <div class="flex-grow border-t border-slate-200"></div>
+            <span class="flex-shrink mx-3 text-xs font-semibold text-slate-400 uppercase">Or use mobile number</span>
+            <div class="flex-grow border-t border-slate-200"></div>
+          </div>
+
+          <!-- Returning Customer Login Form -->
+          <form id="customerLoginForm" onsubmit="handleCustomerLogin(event)" class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1">Mobile Number</label>
+              <input id="custLoginMobile" type="tel" required placeholder="Enter 10-digit mobile number" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1">Password</label>
+              <input id="custLoginPass" type="password" required placeholder="Enter your password" class
+```
